@@ -520,15 +520,15 @@ function renderMemberDeadlines() {
           else if (days<=3) daysHtml=`<span class="days-badge warn">${days}d left</span>`;
           else daysHtml=`<span class="days-badge">${days}d left</span>`;
         }
-        return `<div class="deadline-row ${locked?'locked':''}" onclick="${locked||status==='submitted'?'':` openSubmit('${d.id}')`}" style="${status==='submitted'?'cursor:default':''}">
+        return `<div class="deadline-row ${locked?'locked':''}"  onclick="${locked?'':` openSubmit('${d.id}')`}">
           <span class="status-dot ${status}"></span>
           <div style="flex:1">
             <div class="dl-name">${d.name}</div>
-            <div class="dl-meta">Due ${fmtDate(d.due)}${mySub?` · Submitted ${fmtDate(mySub.created_at)}`:''}</div>
+            <div class="dl-meta">Due ${fmtDate(d.due)}${mySub?` · Last submitted ${fmtDate(mySub.created_at)}`:''}</div>
           </div>
           ${daysHtml}
           <span class="tag ${status}">${{approved:'✓ Approved',submitted:'Submitted',overdue:'Overdue',pending:'Pending'}[status]}</span>
-          ${!locked&&status!=='submitted'?`<i class="ti ti-chevron-right" style="color:var(--text3);font-size:13px;margin-left:2px"></i>`:''}
+          ${!locked?`<span style="font-size:11px;color:var(--col-blue);margin-left:8px;white-space:nowrap">${status==='submitted'?'Resubmit':'Submit'} <i class="ti ti-chevron-right" style="font-size:11px"></i></span>`:''}
         </div>`;
       }).join('');
 
