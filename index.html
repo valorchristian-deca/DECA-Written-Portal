@@ -3,215 +3,387 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DECA Written Events Portal</title>
+<title>DECA Written Events Portal — Valor Christian</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
 <script src="https://accounts.google.com/gsi/client" async defer></script>
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   :root {
-    --red: #C8102E;
-    --gold: #F5A800;
-    --bg: #F7F6F3;
-    --surface: #FFFFFF;
-    --surface2: #F1F0ED;
-    --border: rgba(0,0,0,0.1);
-    --border-md: rgba(0,0,0,0.18);
-    --text: #1A1A1A;
-    --text2: #6B6966;
-    --text3: #9A9794;
-    --radius: 10px;
-    --radius-lg: 14px;
-    --shadow: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.04);
-    --shadow-lg: 0 8px 24px rgba(0,0,0,0.12);
+    --navy:       #0F1E35;
+    --navy-mid:   #162844;
+    --navy-light: #1E3558;
+    --navy-border:#243F65;
+    --deca-blue:  #00539B;
+    --col-blue:   #4E9DC9;
+    --gold:       #F5A800;
+    --gold-dim:   #B37C00;
+    --white:      #FFFFFF;
+    --off-white:  #F0F4F8;
+    --text:       #E8EDF2;
+    --text2:      #8DA4BE;
+    --text3:      #546E8A;
+    --success:    #22C97A;
+    --warning:    #F5A800;
+    --danger:     #E84040;
+    --radius:     8px;
+    --radius-lg:  12px;
+    --shadow:     0 1px 4px rgba(0,0,0,0.3);
+    --shadow-lg:  0 8px 32px rgba(0,0,0,0.5);
   }
-  body { font-family: 'DM Sans', system-ui, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; font-size: 15px; line-height: 1.5; }
 
-  /* LOGIN SCREEN */
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background: var(--navy);
+    color: var(--text);
+    min-height: 100vh;
+    font-size: 14px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ─── LOGIN ─────────────────────────────────────────────── */
   #loginScreen {
-    min-height: 100vh; display: flex; align-items: center; justify-content: center;
-    background: var(--bg);
+    min-height: 100vh;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--navy);
+    background-image: radial-gradient(ellipse at 20% 50%, rgba(0,83,155,0.15) 0%, transparent 60%),
+                      radial-gradient(ellipse at 80% 20%, rgba(245,168,0,0.08) 0%, transparent 50%);
   }
   .login-card {
-    background: var(--surface); border: 0.5px solid var(--border-md);
-    border-radius: var(--radius-lg); padding: 2.5rem 2rem;
-    width: min(420px, 92vw); text-align: center;
+    background: var(--navy-mid);
+    border: 1px solid var(--navy-border);
+    border-radius: var(--radius-lg);
+    padding: 2.75rem 2.25rem;
+    width: min(420px, 92vw);
+    text-align: center;
     box-shadow: var(--shadow-lg);
   }
-  .login-logo {
-    display: inline-flex; align-items: center; gap: 10px;
-    margin-bottom: 1.75rem;
+  .login-lockup {
+    display: flex; align-items: center; justify-content: center;
+    gap: 12px; margin-bottom: 2rem;
   }
-  .login-pill {
-    background: var(--red); color: white;
-    font-size: 13px; font-weight: 600; padding: 5px 12px;
-    border-radius: 8px; letter-spacing: 0.08em;
+  .login-divider {
+    width: 1px; height: 36px;
+    background: var(--navy-border);
   }
-  .login-title { font-size: 20px; font-weight: 600; margin-bottom: 6px; }
-  .login-sub { font-size: 14px; color: var(--text3); margin-bottom: 2rem; line-height: 1.6; }
-  .school-email-note {
-    background: #FFF8E6; border: 0.5px solid #F5D78A;
-    border-radius: var(--radius); padding: 12px 16px;
-    font-size: 13px; color: #7A4F00; margin-bottom: 1.5rem;
+  .login-badge {
+    background: var(--deca-blue);
+    color: white; font-size: 12px; font-weight: 700;
+    padding: 4px 10px; border-radius: 5px;
+    letter-spacing: 0.1em;
+  }
+  .login-school {
+    font-size: 13px; font-weight: 600;
+    color: var(--col-blue); letter-spacing: 0.03em;
+  }
+  .login-title {
+    font-size: 22px; font-weight: 700;
+    color: var(--white); margin-bottom: 6px; letter-spacing: -0.02em;
+  }
+  .login-sub {
+    font-size: 13px; color: var(--text2);
+    margin-bottom: 1.75rem; line-height: 1.65;
+  }
+  .email-note {
+    background: rgba(245,168,0,0.08);
+    border: 1px solid rgba(245,168,0,0.2);
+    border-radius: var(--radius);
+    padding: 12px 14px; margin-bottom: 1.75rem;
+    font-size: 12px; color: #D4A017;
     display: flex; align-items: flex-start; gap: 8px; text-align: left;
   }
-  .school-email-note i { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+  .email-note i { font-size: 15px; flex-shrink: 0; margin-top: 1px; }
   #googleBtn { display: flex; justify-content: center; }
-  .login-footer { font-size: 12px; color: var(--text3); margin-top: 1.5rem; }
+  .login-footer { font-size: 11px; color: var(--text3); margin-top: 1.25rem; }
 
-  /* APP */
+  /* ─── APP ───────────────────────────────────────────────── */
   #app { display: none; }
   .app-inner { display: flex; min-height: 100vh; }
 
-  /* SIDEBAR */
+  /* ─── SIDEBAR ───────────────────────────────────────────── */
   .sidebar {
-    width: 240px; flex-shrink: 0; background: var(--surface);
-    border-right: 0.5px solid var(--border);
+    width: 232px; flex-shrink: 0;
+    background: var(--navy-mid);
+    border-right: 1px solid var(--navy-border);
     display: flex; flex-direction: column;
     position: sticky; top: 0; height: 100vh; overflow-y: auto;
   }
-  .sidebar-logo { padding: 1.25rem 1.25rem 1rem; border-bottom: 0.5px solid var(--border); }
-  .logo-mark { display: inline-flex; align-items: center; gap: 8px; margin-bottom: 4px; }
-  .logo-pill { background: var(--red); color: white; font-size: 11px; font-weight: 600; padding: 3px 8px; border-radius: 6px; letter-spacing: 0.08em; }
-  .logo-chapter { font-size: 15px; font-weight: 600; color: var(--text); }
-  .logo-sub { font-size: 12px; color: var(--text3); margin-top: 1px; }
-
-  .sidebar-section { padding: 1rem 0.75rem 0.5rem; }
-  .sidebar-section-label { font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text3); padding: 0 0.5rem; margin-bottom: 4px; }
-  .nav-item { display: flex; align-items: center; gap: 9px; padding: 7px 10px; border-radius: 8px; font-size: 13px; color: var(--text2); cursor: pointer; transition: all 0.12s; border: none; background: none; width: 100%; text-align: left; font-family: 'DM Sans', sans-serif; }
-  .nav-item:hover { background: var(--surface2); color: var(--text); }
-  .nav-item.active { background: #FFF0F2; color: var(--red); font-weight: 500; }
-  .nav-item i { font-size: 16px; flex-shrink: 0; }
-  .nav-badge { margin-left: auto; font-size: 11px; font-weight: 600; background: var(--gold); color: #5a3c00; padding: 1px 7px; border-radius: 20px; }
-
-  .sidebar-user {
-    margin-top: auto; padding: 1rem 1.25rem;
-    border-top: 0.5px solid var(--border);
+  .sidebar-logo {
+    padding: 1.25rem;
+    border-bottom: 1px solid var(--navy-border);
   }
-  .user-row { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
-  .user-avatar {
-    width: 32px; height: 32px; border-radius: 50%;
-    background: #FFF0F2; color: var(--red);
-    font-size: 13px; font-weight: 600;
+  .logo-top {
+    display: flex; align-items: center; gap: 8px; margin-bottom: 2px;
+  }
+  .logo-deca {
+    background: var(--deca-blue); color: white;
+    font-size: 10px; font-weight: 700; padding: 3px 7px;
+    border-radius: 4px; letter-spacing: 0.12em;
+  }
+  .logo-name { font-size: 14px; font-weight: 700; color: var(--white); letter-spacing: -0.01em; }
+  .logo-sub { font-size: 11px; color: var(--text3); padding-left: 1px; }
+
+  .sidebar-sect { padding: 1.25rem 0.75rem 0.5rem; }
+  .sidebar-lbl {
+    font-size: 10px; font-weight: 600; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--text3);
+    padding: 0 0.5rem; margin-bottom: 3px;
+  }
+  .nav-item {
+    display: flex; align-items: center; gap: 8px;
+    padding: 7px 10px; border-radius: var(--radius);
+    font-size: 13px; color: var(--text2);
+    cursor: pointer; transition: all 0.12s;
+    border: none; background: none; width: 100%; text-align: left;
+    font-family: 'Inter', sans-serif; font-weight: 500;
+  }
+  .nav-item:hover { background: var(--navy-light); color: var(--text); }
+  .nav-item.active { background: rgba(0,83,155,0.25); color: var(--col-blue); }
+  .nav-item i { font-size: 15px; flex-shrink: 0; }
+  .nav-badge {
+    margin-left: auto; font-size: 10px; font-weight: 700;
+    background: var(--gold); color: var(--navy);
+    padding: 1px 6px; border-radius: 20px;
+  }
+
+  .sidebar-bottom { margin-top: auto; padding: 1rem 1.25rem; border-top: 1px solid var(--navy-border); }
+  .role-sw { display: flex; background: var(--navy); border-radius: var(--radius); padding: 3px; gap: 2px; margin-bottom: 10px; }
+  .role-btn {
+    flex: 1; font-size: 11px; font-weight: 600; padding: 5px 8px;
+    border: none; border-radius: 6px; cursor: pointer;
+    font-family: 'Inter', sans-serif; color: var(--text3);
+    background: transparent; transition: all 0.12s; letter-spacing: 0.02em;
+  }
+  .role-btn.active { background: var(--navy-light); color: var(--text); }
+
+  .user-row { display: flex; align-items: center; gap: 9px; margin-bottom: 8px; }
+  .user-av {
+    width: 30px; height: 30px; border-radius: 50%; flex-shrink: 0;
+    background: var(--deca-blue); color: white;
+    font-size: 12px; font-weight: 700;
     display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0; overflow: hidden;
+    overflow: hidden;
   }
-  .user-avatar img { width: 100%; height: 100%; object-fit: cover; }
-  .user-name { font-size: 13px; font-weight: 500; color: var(--text); }
-  .user-email { font-size: 11px; color: var(--text3); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 160px; }
-  .signout-btn { width: 100%; font-size: 12px; padding: 6px; border: 0.5px solid var(--border-md); border-radius: 7px; background: transparent; cursor: pointer; font-family: 'DM Sans', sans-serif; color: var(--text2); display: flex; align-items: center; justify-content: center; gap: 5px; transition: all 0.12s; }
-  .signout-btn:hover { background: var(--surface2); }
+  .user-av img { width: 100%; height: 100%; object-fit: cover; }
+  .user-name { font-size: 12px; font-weight: 600; color: var(--text); }
+  .user-email { font-size: 10px; color: var(--text3); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 150px; }
+  .signout-btn {
+    width: 100%; font-size: 11px; font-weight: 500; padding: 6px;
+    border: 1px solid var(--navy-border); border-radius: var(--radius);
+    background: transparent; cursor: pointer; color: var(--text3);
+    font-family: 'Inter', sans-serif;
+    display: flex; align-items: center; justify-content: center; gap: 5px;
+    transition: all 0.12s;
+  }
+  .signout-btn:hover { background: var(--navy-light); color: var(--text2); }
 
-  .role-switcher { display: flex; background: var(--surface2); border-radius: 8px; padding: 3px; gap: 2px; margin-bottom: 10px; }
-  .role-btn { flex: 1; font-size: 12px; padding: 5px 8px; border: none; border-radius: 6px; cursor: pointer; font-family: 'DM Sans', sans-serif; color: var(--text2); background: transparent; transition: all 0.12s; font-weight: 500; }
-  .role-btn.active { background: var(--surface); color: var(--text); box-shadow: 0 1px 2px rgba(0,0,0,0.1); }
-
-  /* MAIN */
+  /* ─── MAIN ──────────────────────────────────────────────── */
   .main { flex: 1; overflow-x: hidden; }
-  .topbar { background: var(--surface); border-bottom: 0.5px solid var(--border); padding: 1rem 1.75rem; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 10; }
-  .topbar-title { font-size: 17px; font-weight: 600; }
-  .topbar-sub { font-size: 13px; color: var(--text3); margin-top: 1px; }
-  .content { padding: 1.75rem; max-width: 960px; }
+  .topbar {
+    background: var(--navy-mid);
+    border-bottom: 1px solid var(--navy-border);
+    padding: 1rem 1.75rem;
+    display: flex; align-items: center; justify-content: space-between;
+    position: sticky; top: 0; z-index: 10;
+  }
+  .topbar-title { font-size: 16px; font-weight: 700; color: var(--white); letter-spacing: -0.02em; }
+  .topbar-sub { font-size: 12px; color: var(--text3); margin-top: 1px; }
+  .content { padding: 1.5rem 1.75rem; max-width: 1000px; }
 
-  /* CARDS */
-  .card { background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow); }
-  .card-header { padding: 1rem 1.25rem; border-bottom: 0.5px solid var(--border); display: flex; align-items: center; gap: 10px; }
-  .card-title { font-size: 14px; font-weight: 600; }
-  .card-sub { font-size: 12px; color: var(--text3); margin-top: 1px; }
+  /* ─── CARDS ─────────────────────────────────────────────── */
+  .card {
+    background: var(--navy-mid);
+    border: 1px solid var(--navy-border);
+    border-radius: var(--radius-lg); overflow: hidden;
+    box-shadow: var(--shadow);
+  }
+  .card-header {
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid var(--navy-border);
+    display: flex; align-items: center; gap: 10px;
+  }
+  .card-title { font-size: 13px; font-weight: 600; color: var(--white); }
+  .card-sub { font-size: 11px; color: var(--text3); margin-top: 1px; }
 
-  /* STATS */
-  .stat-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; margin-bottom: 1.5rem; }
-  .stat-card { background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--radius); padding: 1rem 1.25rem; box-shadow: var(--shadow); }
-  .stat-num { font-size: 28px; font-weight: 600; line-height: 1; margin-bottom: 4px; }
-  .stat-lbl { font-size: 12px; color: var(--text3); font-weight: 500; }
+  /* ─── STATS ─────────────────────────────────────────────── */
+  .stat-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 10px; margin-bottom: 1.25rem; }
+  .stat-card {
+    background: var(--navy-mid); border: 1px solid var(--navy-border);
+    border-radius: var(--radius); padding: 1rem 1.25rem; box-shadow: var(--shadow);
+  }
+  .stat-num { font-size: 26px; font-weight: 700; line-height: 1; margin-bottom: 4px; letter-spacing: -0.03em; }
+  .stat-lbl { font-size: 11px; color: var(--text3); font-weight: 500; }
 
-  /* DEADLINES */
-  .deadline-row { display: flex; align-items: center; gap: 12px; padding: 0.9rem 1.25rem; border-bottom: 0.5px solid var(--border); cursor: pointer; transition: background 0.1s; }
+  /* ─── DEADLINE ROWS ─────────────────────────────────────── */
+  .deadline-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 0.85rem 1.25rem;
+    border-bottom: 1px solid var(--navy-border);
+    cursor: pointer; transition: background 0.1s;
+  }
   .deadline-row:last-child { border-bottom: none; }
-  .deadline-row:hover { background: var(--surface2); }
+  .deadline-row:hover { background: var(--navy-light); }
   .deadline-row.locked { cursor: default; }
   .deadline-row.locked:hover { background: transparent; }
-  .status-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
-  .status-dot.pending { background: #D0CEC9; }
+
+  .status-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+  .status-dot.pending  { background: var(--text3); }
   .status-dot.submitted { background: var(--gold); }
-  .status-dot.approved { background: #1D9E75; }
-  .status-dot.overdue { background: #C8102E; }
-  .dl-name { font-size: 14px; font-weight: 500; }
-  .dl-meta { font-size: 12px; color: var(--text3); margin-top: 2px; }
-  .tag { font-size: 11px; font-weight: 600; padding: 3px 9px; border-radius: 20px; white-space: nowrap; }
-  .tag.pending { background: #F1F0ED; color: var(--text3); }
-  .tag.submitted { background: #FFF3D6; color: #7A4F00; }
-  .tag.approved { background: #E1F5EE; color: #0F6E56; }
-  .tag.overdue { background: #FCEBEB; color: #A32D2D; }
-  .days-badge { font-size: 12px; color: var(--text3); white-space: nowrap; margin-right: 4px; }
-  .days-badge.urgent { color: #A32D2D; font-weight: 500; }
+  .status-dot.approved  { background: var(--success); }
+  .status-dot.overdue   { background: var(--danger); }
 
-  /* TABLE */
+  .dl-name { font-size: 13px; font-weight: 600; color: var(--text); }
+  .dl-meta { font-size: 11px; color: var(--text3); margin-top: 2px; }
+
+  /* ─── TAGS ──────────────────────────────────────────────── */
+  .tag { font-size: 10px; font-weight: 700; padding: 3px 8px; border-radius: 20px; white-space: nowrap; letter-spacing: 0.04em; text-transform: uppercase; }
+  .tag.pending   { background: rgba(84,110,138,0.2); color: var(--text3); }
+  .tag.submitted { background: rgba(245,168,0,0.15); color: var(--gold); }
+  .tag.approved  { background: rgba(34,201,122,0.15); color: var(--success); }
+  .tag.overdue   { background: rgba(232,64,64,0.15); color: var(--danger); }
+
+  .days-badge { font-size: 11px; color: var(--text3); white-space: nowrap; margin-right: 4px; }
+  .days-badge.urgent { color: var(--danger); font-weight: 600; }
+  .days-badge.warn   { color: var(--gold); font-weight: 600; }
+
+  /* ─── TABLE ─────────────────────────────────────────────── */
   .sub-table { width: 100%; border-collapse: collapse; }
-  .sub-table th { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text3); padding: 9px 14px; text-align: left; border-bottom: 0.5px solid var(--border); background: var(--surface2); }
-  .sub-table td { font-size: 13px; padding: 12px 14px; border-bottom: 0.5px solid var(--border); color: var(--text); vertical-align: middle; }
+  .sub-table th {
+    font-size: 10px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.08em; color: var(--text3);
+    padding: 9px 14px; text-align: left;
+    border-bottom: 1px solid var(--navy-border);
+    background: var(--navy);
+  }
+  .sub-table td { font-size: 12px; padding: 11px 14px; border-bottom: 1px solid var(--navy-border); color: var(--text); vertical-align: middle; }
   .sub-table tr:last-child td { border-bottom: none; }
-  .sub-table tbody tr:hover td { background: var(--surface2); }
-  .code-pill { font-size: 11px; font-weight: 600; background: var(--surface2); color: var(--text2); padding: 2px 7px; border-radius: 5px; font-family: 'DM Mono', monospace; }
-  .act-btn { font-size: 12px; padding: 5px 11px; border: 0.5px solid var(--border-md); border-radius: 7px; background: transparent; cursor: pointer; font-family: 'DM Sans', sans-serif; color: var(--text); margin-left: 4px; transition: all 0.1s; display: inline-flex; align-items: center; gap: 4px; }
-  .act-btn:hover { background: var(--surface2); }
-  .act-btn.approve { border-color: #1D9E75; color: #0F6E56; }
-  .act-btn.approve:hover { background: #E1F5EE; }
+  .sub-table tbody tr:hover td { background: var(--navy-light); }
 
-  /* TOOLBAR */
-  .toolbar { display: flex; gap: 8px; margin-bottom: 1.25rem; flex-wrap: wrap; align-items: center; }
-  .btn { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 500; padding: 8px 14px; border-radius: 8px; cursor: pointer; border: 0.5px solid var(--border-md); font-family: 'DM Sans', sans-serif; transition: all 0.12s; background: var(--surface); color: var(--text); }
-  .btn:hover { background: var(--surface2); }
-  .btn.primary { background: var(--red); color: white; border-color: transparent; }
-  .btn.primary:hover { opacity: 0.88; }
-  .btn.ghost { background: transparent; border-color: var(--border); color: var(--text2); }
-  .btn.ghost.active { background: var(--surface); color: var(--text); border-color: var(--border-md); }
-  .btn i { font-size: 15px; }
+  .code-pill {
+    font-size: 10px; font-weight: 700; letter-spacing: 0.06em;
+    background: rgba(0,83,155,0.25); color: var(--col-blue);
+    padding: 2px 7px; border-radius: 4px;
+    font-family: 'JetBrains Mono', monospace;
+  }
 
-  /* EVENT PICKER */
+  .act-btn {
+    font-size: 11px; font-weight: 500; padding: 5px 10px;
+    border: 1px solid var(--navy-border);
+    border-radius: var(--radius); background: transparent;
+    cursor: pointer; font-family: 'Inter', sans-serif;
+    color: var(--text2); margin-left: 4px; transition: all 0.1s;
+    display: inline-flex; align-items: center; gap: 4px;
+  }
+  .act-btn:hover { background: var(--navy-light); color: var(--text); }
+  .act-btn.approve { border-color: rgba(34,201,122,0.3); color: var(--success); }
+  .act-btn.approve:hover { background: rgba(34,201,122,0.1); }
+
+  /* ─── TOOLBAR ───────────────────────────────────────────── */
+  .toolbar { display: flex; gap: 6px; margin-bottom: 1.25rem; flex-wrap: wrap; align-items: center; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 12px; font-weight: 600; padding: 7px 14px;
+    border-radius: var(--radius); cursor: pointer;
+    border: 1px solid var(--navy-border);
+    font-family: 'Inter', sans-serif; transition: all 0.12s;
+    background: var(--navy-mid); color: var(--text2);
+    letter-spacing: 0.01em;
+  }
+  .btn:hover { background: var(--navy-light); color: var(--text); }
+  .btn.primary { background: var(--deca-blue); color: white; border-color: transparent; }
+  .btn.primary:hover { background: #0060B3; }
+  .btn.ghost { background: transparent; }
+  .btn.ghost.active { background: rgba(0,83,155,0.2); color: var(--col-blue); border-color: rgba(0,83,155,0.4); }
+  .btn i { font-size: 14px; }
+
+  /* ─── FORM ELEMENTS ─────────────────────────────────────── */
   .event-picker { margin-bottom: 1.5rem; }
-  .picker-label { font-size: 12px; font-weight: 600; color: var(--text3); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 8px; }
-  select, input[type="text"], input[type="date"], textarea { font-family: 'DM Sans', sans-serif; font-size: 14px; color: var(--text); background: var(--surface); border: 0.5px solid var(--border-md); border-radius: 8px; padding: 9px 12px; outline: none; transition: border-color 0.12s; }
-  select:focus, input:focus, textarea:focus { border-color: var(--red); }
+  .picker-label { font-size: 10px; font-weight: 700; color: var(--text3); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 7px; }
+  select, input[type="text"], input[type="date"], textarea {
+    font-family: 'Inter', sans-serif; font-size: 13px; color: var(--text);
+    background: var(--navy); border: 1px solid var(--navy-border);
+    border-radius: var(--radius); padding: 9px 12px; outline: none;
+    transition: border-color 0.12s;
+  }
+  select:focus, input:focus, textarea:focus { border-color: var(--deca-blue); }
   select { cursor: pointer; width: 100%; }
+  select option { background: var(--navy-mid); }
   textarea { resize: vertical; }
 
-  /* MODALS */
-  .overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.35); z-index: 100; align-items: center; justify-content: center; backdrop-filter: blur(2px); }
+  /* ─── MODALS ────────────────────────────────────────────── */
+  .overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 100; align-items: center; justify-content: center; backdrop-filter: blur(3px); }
   .overlay.open { display: flex; }
-  .modal { background: var(--surface); border-radius: var(--radius-lg); border: 0.5px solid var(--border-md); width: min(540px, 92vw); max-height: 90vh; overflow-y: auto; padding: 1.75rem; box-shadow: var(--shadow-lg); }
+  .modal {
+    background: var(--navy-mid); border-radius: var(--radius-lg);
+    border: 1px solid var(--navy-border);
+    width: min(520px, 92vw); max-height: 90vh;
+    overflow-y: auto; padding: 1.75rem;
+    box-shadow: var(--shadow-lg);
+  }
   .modal-head { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 1.5rem; }
-  .modal-title { font-size: 17px; font-weight: 600; }
-  .modal-sub { font-size: 13px; color: var(--text3); margin-top: 3px; }
-  .close-btn { background: var(--surface2); border: none; cursor: pointer; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--text2); font-size: 16px; flex-shrink: 0; transition: background 0.12s; }
-  .close-btn:hover { background: var(--border); }
-  .upload-zone { border: 1.5px dashed var(--border-md); border-radius: var(--radius); padding: 2.5rem; text-align: center; cursor: pointer; transition: all 0.15s; margin-bottom: 1rem; }
-  .upload-zone:hover { border-color: var(--red); background: #FFF5F6; }
-  .upload-zone i { font-size: 32px; color: var(--text3); margin-bottom: 10px; display: block; }
+  .modal-title { font-size: 16px; font-weight: 700; color: var(--white); letter-spacing: -0.02em; }
+  .modal-sub { font-size: 12px; color: var(--text3); margin-top: 3px; }
+  .close-btn {
+    background: var(--navy); border: 1px solid var(--navy-border);
+    cursor: pointer; width: 28px; height: 28px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--text3); font-size: 15px; flex-shrink: 0;
+    transition: all 0.12s;
+  }
+  .close-btn:hover { background: var(--navy-light); color: var(--text); }
+
+  .upload-zone {
+    border: 1.5px dashed var(--navy-border);
+    border-radius: var(--radius); padding: 2.5rem;
+    text-align: center; cursor: pointer;
+    transition: all 0.15s; margin-bottom: 1rem;
+  }
+  .upload-zone:hover { border-color: var(--deca-blue); background: rgba(0,83,155,0.05); }
+  .upload-zone i { font-size: 30px; color: var(--text3); margin-bottom: 10px; display: block; }
   .upload-text { font-size: 13px; color: var(--text3); line-height: 1.6; }
   .upload-text strong { color: var(--text); }
-  .file-chip { display: none; align-items: center; gap: 8px; background: var(--surface2); border: 0.5px solid var(--border); border-radius: 8px; padding: 10px 14px; margin-bottom: 1rem; }
+
+  .file-chip { display: none; align-items: center; gap: 8px; background: var(--navy); border: 1px solid var(--navy-border); border-radius: var(--radius); padding: 9px 14px; margin-bottom: 1rem; }
   .file-chip.show { display: flex; }
-  .file-chip i { color: var(--red); font-size: 18px; }
-  .file-chip-name { font-size: 13px; flex: 1; font-weight: 500; }
-  .remove-file { background: none; border: none; cursor: pointer; color: var(--text3); font-size: 16px; padding: 0; }
+  .file-chip i { color: var(--col-blue); font-size: 17px; }
+  .file-chip-name { font-size: 12px; flex: 1; font-weight: 500; color: var(--text); }
+  .remove-file { background: none; border: none; cursor: pointer; color: var(--text3); font-size: 15px; padding: 0; }
+
   .form-row { margin-bottom: 1rem; }
-  .form-label { display: block; font-size: 13px; font-weight: 600; color: var(--text2); margin-bottom: 5px; }
-  .form-label span { font-weight: 400; color: var(--text3); }
+  .form-label { display: block; font-size: 11px; font-weight: 700; color: var(--text3); margin-bottom: 5px; letter-spacing: 0.05em; text-transform: uppercase; }
+  .form-label span { font-weight: 400; text-transform: none; letter-spacing: 0; color: var(--text3); opacity: 0.7; }
   .form-row input, .form-row select, .form-row textarea { width: 100%; }
   .form-row textarea { min-height: 90px; }
   .modal-actions { display: flex; gap: 8px; justify-content: flex-end; margin-top: 1.5rem; }
 
-  /* TOAST */
-  .toast { position: fixed; bottom: 28px; right: 28px; z-index: 200; background: var(--text); color: white; border-radius: 10px; padding: 12px 18px; font-size: 13px; font-weight: 500; display: flex; align-items: center; gap: 8px; transform: translateY(70px); opacity: 0; transition: all 0.22s cubic-bezier(0.34,1.56,0.64,1); pointer-events: none; box-shadow: var(--shadow-lg); }
+  /* ─── GOLD ACCENT LINE ──────────────────────────────────── */
+  .gold-line {
+    height: 2px; background: linear-gradient(90deg, var(--gold), transparent);
+    border-radius: 2px; margin-bottom: 1.5rem;
+    opacity: 0.6;
+  }
+
+  /* ─── TOAST ─────────────────────────────────────────────── */
+  .toast {
+    position: fixed; bottom: 24px; right: 24px; z-index: 200;
+    background: var(--navy-light); color: var(--text);
+    border: 1px solid var(--navy-border);
+    border-radius: var(--radius); padding: 11px 16px;
+    font-size: 12px; font-weight: 500;
+    display: flex; align-items: center; gap: 8px;
+    transform: translateY(60px); opacity: 0;
+    transition: all 0.2s cubic-bezier(0.34,1.56,0.64,1);
+    pointer-events: none; box-shadow: var(--shadow-lg);
+  }
   .toast.show { transform: translateY(0); opacity: 1; }
-  .toast i { font-size: 16px; }
+  .toast i { font-size: 15px; }
 
   .empty { padding: 3rem; text-align: center; color: var(--text3); }
-  .empty i { font-size: 36px; display: block; margin-bottom: 12px; opacity: 0.5; }
-  .empty p { font-size: 14px; }
+  .empty i { font-size: 32px; display: block; margin-bottom: 10px; opacity: 0.4; }
+  .empty p { font-size: 13px; }
   .view { display: none; }
   .view.active { display: block; }
 
@@ -223,21 +395,22 @@
 </head>
 <body>
 
-<!-- LOGIN SCREEN -->
+<!-- LOGIN -->
 <div id="loginScreen">
   <div class="login-card">
-    <div class="login-logo">
-      <div class="login-pill">DECA</div>
-      <div style="font-size:16px;font-weight:600">Written Events Portal</div>
+    <div class="login-lockup">
+      <div class="login-badge">DECA</div>
+      <div class="login-divider"></div>
+      <div class="login-school">Valor Christian Eagles</div>
     </div>
-    <div class="login-title">Colorado Chapter</div>
-    <div class="login-sub">Sign in to view your event deadlines and submit your written work.</div>
-    <div class="school-email-note">
-      <i class="ti ti-info-circle"></i>
-      <span>Please sign in with your <strong>Valor Christian or GoValor school email</strong> (@valorchristian.com or @govalor.com) — personal Gmail accounts will not be accepted.</span>
+    <div class="login-title">Written Events Portal</div>
+    <div class="login-sub">Track deadlines and submit your written work for Colorado DECA competition.</div>
+    <div class="email-note">
+      <i class="ti ti-alert-triangle"></i>
+      <span>Sign in with your <strong>Valor Christian or GoValor school email</strong> (@valorchristian.com or @govalor.com) — personal accounts will not be accepted.</span>
     </div>
     <div id="googleBtn"></div>
-    <div class="login-footer">By signing in you agree to use this portal only for DECA chapter submissions.</div>
+    <div class="login-footer">For chapter use only · Valor Christian DECA · Highlands Ranch, CO</div>
   </div>
 </div>
 
@@ -246,22 +419,22 @@
   <div class="app-inner">
     <aside class="sidebar">
       <div class="sidebar-logo">
-        <div class="logo-mark">
-          <div class="logo-pill">DECA</div>
-          <div class="logo-chapter">Chapter Portal</div>
+        <div class="logo-top">
+          <div class="logo-deca">DECA</div>
+          <div class="logo-name">Written Portal</div>
         </div>
-        <div class="logo-sub">Written Events — Colorado</div>
+        <div class="logo-sub">Valor Christian Eagles · Colorado</div>
       </div>
 
-      <div class="sidebar-section" id="memberNav">
-        <div class="sidebar-section-label">Member</div>
+      <div class="sidebar-sect" id="memberNav">
+        <div class="sidebar-lbl">Member</div>
         <button class="nav-item active" onclick="showMemberTab()">
           <i class="ti ti-file-text"></i> My event
         </button>
       </div>
 
-      <div class="sidebar-section" id="officerNav" style="display:none">
-        <div class="sidebar-section-label">Officer</div>
+      <div class="sidebar-sect" id="officerNav" style="display:none">
+        <div class="sidebar-lbl">Officer</div>
         <button class="nav-item active" onclick="showOfficerTab('inbox')">
           <i class="ti ti-inbox"></i> Submission inbox
           <span class="nav-badge" id="inboxBadge" style="display:none">0</span>
@@ -271,14 +444,14 @@
         </button>
       </div>
 
-      <div class="sidebar-user">
-        <div class="role-switcher" id="roleSwitcher" style="display:none">
+      <div class="sidebar-bottom">
+        <div class="role-sw" id="roleSwitcher" style="display:none">
           <button class="role-btn active" id="btnMember" onclick="switchRole('member')">Member</button>
           <button class="role-btn" id="btnOfficer" onclick="switchRole('officer')">Officer</button>
         </div>
         <div class="user-row">
-          <div class="user-avatar" id="userAvatar"></div>
-          <div>
+          <div class="user-av" id="userAvatar"></div>
+          <div style="min-width:0">
             <div class="user-name" id="userName"></div>
             <div class="user-email" id="userEmail"></div>
           </div>
@@ -288,7 +461,7 @@
     </aside>
 
     <main class="main">
-      <!-- MEMBER VIEW -->
+      <!-- MEMBER -->
       <div id="memberView" class="view active">
         <div class="topbar">
           <div>
@@ -297,6 +470,7 @@
           </div>
         </div>
         <div class="content">
+          <div class="gold-line"></div>
           <div class="event-picker">
             <div class="picker-label">Your event</div>
             <select id="eventSelect" onchange="renderMemberDeadlines()">
@@ -316,6 +490,7 @@
           </div>
         </div>
         <div class="content">
+          <div class="gold-line"></div>
           <div class="stat-grid" id="officerStats"></div>
           <div class="toolbar">
             <button class="btn ghost active" id="filterAll" onclick="setFilter('all')"><i class="ti ti-list"></i> All</button>
@@ -343,8 +518,9 @@
           <button class="btn primary" onclick="openAddDeadline()"><i class="ti ti-plus"></i> Add deadline</button>
         </div>
         <div class="content">
+          <div class="gold-line"></div>
           <div class="toolbar">
-            <select id="filterEvent" onchange="renderDeadlinesTable()" style="width:auto;font-size:13px;padding:7px 12px">
+            <select id="filterEvent" onchange="renderDeadlinesTable()" style="width:auto;font-size:12px;padding:7px 12px">
               <option value="">All events</option>
             </select>
           </div>
@@ -355,7 +531,7 @@
   </div>
 </div>
 
-<!-- SUBMISSION PANEL -->
+<!-- SUBMIT MODAL -->
 <div class="overlay" id="subOverlay">
   <div class="modal">
     <div class="modal-head">
@@ -376,7 +552,7 @@
       <button class="remove-file" onclick="removeFile()"><i class="ti ti-x"></i></button>
     </div>
     <div class="form-row">
-      <label class="form-label" for="noteArea">Note to reviewer <span>(optional)</span></label>
+      <label class="form-label">Note to reviewer <span>(optional)</span></label>
       <textarea id="noteArea" placeholder="Any context, questions, or flags for your officer..."></textarea>
     </div>
     <div class="modal-actions">
@@ -422,18 +598,9 @@
       </div>
       <button class="close-btn" onclick="closeOverlay('emailOverlay')"><i class="ti ti-x"></i></button>
     </div>
-    <div class="form-row">
-      <label class="form-label">To</label>
-      <input type="text" id="emailTo">
-    </div>
-    <div class="form-row">
-      <label class="form-label">Subject</label>
-      <input type="text" id="emailSubject">
-    </div>
-    <div class="form-row">
-      <label class="form-label">Message</label>
-      <textarea id="emailBody" style="min-height:120px"></textarea>
-    </div>
+    <div class="form-row"><label class="form-label">To</label><input type="text" id="emailTo"></div>
+    <div class="form-row"><label class="form-label">Subject</label><input type="text" id="emailSubject"></div>
+    <div class="form-row"><label class="form-label">Message</label><textarea id="emailBody" style="min-height:120px"></textarea></div>
     <div class="modal-actions">
       <button class="btn ghost" onclick="closeOverlay('emailOverlay')">Cancel</button>
       <button class="btn primary" onclick="sendEmail()"><i class="ti ti-send"></i> Open in mail app</button>
@@ -444,10 +611,7 @@
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script>
-// ─── CONFIG ──────────────────────────────────────────────────────────────────
 const CLIENT_ID = '482989502758-1hncj9oj7mfd5bbm2ifoh5dqmusdbjua.apps.googleusercontent.com';
-
-// Officer emails — add your school email here
 const OFFICER_EMAILS = [
   'matthew.leach@govalor.com',
   'john.everett@govalor.com',
@@ -456,7 +620,6 @@ const OFFICER_EMAILS = [
   'rubixmathmastermind@gmail.com',
 ];
 
-// ─── EVENTS ───────────────────────────────────────────────────────────────────
 const EVENTS = [
   {id:'pmbs',name:'Business Solutions Project',code:'PMBS',cat:'Project Management'},
   {id:'pmcd',name:'Career Development Project',code:'PMCD',cat:'Project Management'},
@@ -483,31 +646,23 @@ const EVENTS = [
   {id:'pse',name:'Professional Selling',code:'PSE',cat:'Professional Selling'},
 ];
 
-// ─── STATE ────────────────────────────────────────────────────────────────────
 let currentUser = null;
-let currentRole = 'member';
 let currentDlId = null;
 let currentFilter = 'all';
 let deadlines = JSON.parse(localStorage.getItem('deca_deadlines') || '[]');
 function save() { localStorage.setItem('deca_deadlines', JSON.stringify(deadlines)); }
 
-// ─── GOOGLE AUTH ──────────────────────────────────────────────────────────────
 window.addEventListener('load', () => {
-  google.accounts.id.initialize({
-    client_id: CLIENT_ID,
-    callback: handleCredential,
-  });
+  google.accounts.id.initialize({ client_id: CLIENT_ID, callback: handleCredential });
   google.accounts.id.renderButton(document.getElementById('googleBtn'), {
-    theme: 'outline', size: 'large', width: 320, text: 'signin_with',
+    theme: 'filled_blue', size: 'large', width: 320, text: 'signin_with',
   });
 });
 
 function handleCredential(response) {
   const payload = JSON.parse(atob(response.credential.split('.')[1]));
   currentUser = {
-    name: payload.name,
-    email: payload.email,
-    picture: payload.picture,
+    name: payload.name, email: payload.email, picture: payload.picture,
     initials: payload.name.split(' ').map(n=>n[0]).join('').toUpperCase().slice(0,2),
   };
   launchApp();
@@ -516,23 +671,13 @@ function handleCredential(response) {
 function launchApp() {
   document.getElementById('loginScreen').style.display = 'none';
   document.getElementById('app').style.display = 'block';
-
-  // Set user info in sidebar
-  const avatarEl = document.getElementById('userAvatar');
-  if (currentUser.picture) {
-    avatarEl.innerHTML = `<img src="${currentUser.picture}" alt="${currentUser.name}">`;
-  } else {
-    avatarEl.textContent = currentUser.initials;
-  }
+  const av = document.getElementById('userAvatar');
+  av.innerHTML = currentUser.picture ? `<img src="${currentUser.picture}" alt="">` : currentUser.initials;
   document.getElementById('userName').textContent = currentUser.name;
   document.getElementById('userEmail').textContent = currentUser.email;
-
-  // Show role switcher if officer
-  const isOfficer = OFFICER_EMAILS.includes(currentUser.email) || OFFICER_EMAILS.length === 0;
-  if (isOfficer) {
+  if (OFFICER_EMAILS.includes(currentUser.email)) {
     document.getElementById('roleSwitcher').style.display = 'flex';
   }
-
   init();
 }
 
@@ -543,39 +688,25 @@ function signOut() {
   document.getElementById('loginScreen').style.display = 'flex';
 }
 
-// ─── INIT ─────────────────────────────────────────────────────────────────────
 function init() {
   ['eventSelect','dlEventSel','filterEvent'].forEach(sid => {
     const sel = document.getElementById(sid);
     if (!sel) return;
-    if (sid === 'filterEvent') sel.innerHTML = '<option value="">All events</option>';
-    else sel.innerHTML = '<option value="">— Select your event —</option>';
-    EVENTS.forEach(e => {
-      const o = document.createElement('option');
-      o.value = e.id;
-      o.textContent = `${e.code} — ${e.name}`;
-      sel.appendChild(o);
-    });
+    sel.innerHTML = sid === 'filterEvent' ? '<option value="">All events</option>' : '<option value="">— Select your event —</option>';
+    EVENTS.forEach(e => { const o = document.createElement('option'); o.value=e.id; o.textContent=`${e.code} — ${e.name}`; sel.appendChild(o); });
   });
-  renderOfficerStats();
-  renderInboxTable();
-  renderDeadlinesTable();
-  updateInboxBadge();
+  renderOfficerStats(); renderInboxTable(); renderDeadlinesTable(); updateInboxBadge();
 }
 
-// ─── HELPERS ──────────────────────────────────────────────────────────────────
 function fmtDate(d) {
   if (!d) return '—';
   const [y,m,day] = d.split('-');
-  const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-  return `${months[+m-1]} ${+day}, ${y}`;
+  return `${['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][+m-1]} ${+day}, ${y}`;
 }
 function daysUntil(d) { if (!d) return null; return Math.ceil((new Date(d) - new Date()) / 86400000); }
 function ev(id) { return EVENTS.find(e => e.id === id); }
 
-// ─── ROLE / NAV ───────────────────────────────────────────────────────────────
 function switchRole(role) {
-  currentRole = role;
   const isMember = role === 'member';
   document.getElementById('btnMember').classList.toggle('active', isMember);
   document.getElementById('btnOfficer').classList.toggle('active', !isMember);
@@ -584,46 +715,38 @@ function switchRole(role) {
   if (isMember) showView('memberView');
   else { showView('officerInboxView'); highlightNav(0); }
 }
-function showView(id) {
-  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-}
+function showView(id) { document.querySelectorAll('.view').forEach(v=>v.classList.remove('active')); document.getElementById(id).classList.add('active'); }
 function showMemberTab() { showView('memberView'); }
-function showOfficerTab(t) {
-  showView(t === 'inbox' ? 'officerInboxView' : 'officerDeadlinesView');
-  highlightNav(t === 'inbox' ? 0 : 1);
-}
-function highlightNav(idx) {
-  document.querySelectorAll('#officerNav .nav-item').forEach((b,i) => b.classList.toggle('active', i===idx));
-}
+function showOfficerTab(t) { showView(t==='inbox'?'officerInboxView':'officerDeadlinesView'); highlightNav(t==='inbox'?0:1); }
+function highlightNav(idx) { document.querySelectorAll('#officerNav .nav-item').forEach((b,i)=>b.classList.toggle('active',i===idx)); }
 
-// ─── MEMBER VIEW ──────────────────────────────────────────────────────────────
 function renderMemberDeadlines() {
   const eventId = document.getElementById('eventSelect').value;
   const cont = document.getElementById('memberDeadlines');
-  if (!eventId) { cont.innerHTML = ''; return; }
+  if (!eventId) { cont.innerHTML=''; return; }
   const e = ev(eventId);
   const dls = deadlines.filter(d => d.eventId === eventId);
   const rows = dls.length === 0
-    ? `<div class="empty"><i class="ti ti-calendar-off"></i><p>No deadlines set for this event yet.<br>Check back soon.</p></div>`
+    ? `<div class="empty"><i class="ti ti-calendar-off"></i><p>No deadlines set yet — check back soon.</p></div>`
     : dls.map(d => {
         const days = daysUntil(d.due);
         const locked = d.status === 'approved';
         let daysHtml = '';
-        if (d.status === 'pending' || d.status === 'overdue') {
-          if (days < 0) daysHtml = `<span class="days-badge urgent">${Math.abs(days)}d overdue</span>`;
-          else if (days === 0) daysHtml = `<span class="days-badge urgent">Due today</span>`;
-          else daysHtml = `<span class="days-badge">${days}d left</span>`;
+        if (d.status==='pending'||d.status==='overdue') {
+          if (days<0) daysHtml=`<span class="days-badge urgent">${Math.abs(days)}d overdue</span>`;
+          else if (days===0) daysHtml=`<span class="days-badge urgent">Due today</span>`;
+          else if (days<=3) daysHtml=`<span class="days-badge warn">${days}d left</span>`;
+          else daysHtml=`<span class="days-badge">${days}d left</span>`;
         }
         return `<div class="deadline-row ${locked?'locked':''}" onclick="${locked?'':` openSubmit('${d.id}')`}">
           <span class="status-dot ${d.status}"></span>
           <div style="flex:1">
             <div class="dl-name">${d.name}</div>
-            <div class="dl-meta">Due ${fmtDate(d.due)}${d.submitted ? ` · Submitted ${fmtDate(d.submitted)}` : ''}</div>
+            <div class="dl-meta">Due ${fmtDate(d.due)}${d.submitted?` · Submitted ${fmtDate(d.submitted)}`:''}</div>
           </div>
           ${daysHtml}
-          <span class="tag ${d.status}">${{approved:'✓ Approved',submitted:'Submitted',overdue:'Overdue',pending:'Not submitted'}[d.status]}</span>
-          ${!locked ? `<i class="ti ti-chevron-right" style="color:var(--text3);font-size:14px;margin-left:2px"></i>` : ''}
+          <span class="tag ${d.status}">${{approved:'✓ Approved',submitted:'Submitted',overdue:'Overdue',pending:'Pending'}[d.status]}</span>
+          ${!locked?`<i class="ti ti-chevron-right" style="color:var(--text3);font-size:13px;margin-left:2px"></i>`:''}
         </div>`;
       }).join('');
   cont.innerHTML = `<div class="card">
@@ -635,89 +758,62 @@ function renderMemberDeadlines() {
   </div>`;
 }
 
-// ─── SUBMIT ───────────────────────────────────────────────────────────────────
 function openSubmit(dlId) {
-  const dl = deadlines.find(d => d.id === dlId);
-  if (!dl || dl.status === 'approved') return;
+  const dl = deadlines.find(d=>d.id===dlId);
+  if (!dl||dl.status==='approved') return;
   currentDlId = dlId;
   const e = ev(dl.eventId);
   document.getElementById('panelTitle').textContent = dl.name;
   document.getElementById('panelSub').textContent = `${e.code} — Due ${fmtDate(dl.due)}`;
-  document.getElementById('noteArea').value = dl.note || '';
+  document.getElementById('noteArea').value = dl.note||'';
   removeFile();
   openOverlay('subOverlay');
 }
-function handleFile(input) {
-  if (input.files[0]) {
-    document.getElementById('fileChipName').textContent = input.files[0].name;
-    document.getElementById('fileChip').classList.add('show');
-  }
-}
-function removeFile() {
-  document.getElementById('fileInput').value = '';
-  document.getElementById('fileChip').classList.remove('show');
-  document.getElementById('fileChipName').textContent = '';
-}
+function handleFile(input) { if(input.files[0]){ document.getElementById('fileChipName').textContent=input.files[0].name; document.getElementById('fileChip').classList.add('show'); } }
+function removeFile() { document.getElementById('fileInput').value=''; document.getElementById('fileChip').classList.remove('show'); document.getElementById('fileChipName').textContent=''; }
 function submitDeadline() {
-  if (!document.getElementById('fileChipName').textContent) {
-    showToast('Please attach a document first.', 'ti-alert-circle', '#C8102E'); return;
-  }
-  const dl = deadlines.find(d => d.id === currentDlId);
-  dl.status = 'submitted';
-  dl.note = document.getElementById('noteArea').value;
-  dl.submitted = new Date().toISOString().split('T')[0];
-  dl.member = currentUser.name;
-  dl.memberEmail = currentUser.email;
-  save();
-  closeOverlay('subOverlay');
-  renderMemberDeadlines();
-  renderOfficerStats();
-  renderInboxTable();
-  updateInboxBadge();
-  showToast('Submitted successfully!', 'ti-circle-check', '#1D9E75');
+  if (!document.getElementById('fileChipName').textContent) { showToast('Please attach a document first.','ti-alert-circle','var(--danger)'); return; }
+  const dl = deadlines.find(d=>d.id===currentDlId);
+  dl.status='submitted'; dl.note=document.getElementById('noteArea').value;
+  dl.submitted=new Date().toISOString().split('T')[0];
+  dl.member=currentUser.name; dl.memberEmail=currentUser.email;
+  save(); closeOverlay('subOverlay');
+  renderMemberDeadlines(); renderOfficerStats(); renderInboxTable(); updateInboxBadge();
+  showToast('Submitted successfully!','ti-circle-check','var(--success)');
 }
 
-// ─── OFFICER ──────────────────────────────────────────────────────────────────
 function renderOfficerStats() {
-  const total = deadlines.length;
-  const awaiting = deadlines.filter(d => d.status === 'submitted').length;
-  const approved = deadlines.filter(d => d.status === 'approved').length;
-  const overdue = deadlines.filter(d => d.status === 'overdue').length;
-  document.getElementById('officerStats').innerHTML = [
-    ['Total deadlines', total, 'var(--text)'],
-    ['Awaiting review', awaiting, '#7A4F00'],
-    ['Approved', approved, '#0F6E56'],
-    ['Overdue', overdue, '#A32D2D'],
-  ].map(([lbl,num,col]) => `<div class="stat-card"><div class="stat-num" style="color:${col}">${num}</div><div class="stat-lbl">${lbl}</div></div>`).join('');
+  const total=deadlines.length, awaiting=deadlines.filter(d=>d.status==='submitted').length,
+    approved=deadlines.filter(d=>d.status==='approved').length, overdue=deadlines.filter(d=>d.status==='overdue').length;
+  document.getElementById('officerStats').innerHTML=[
+    ['Total deadlines',total,'var(--text)'],
+    ['Awaiting review',awaiting,'var(--gold)'],
+    ['Approved',approved,'var(--success)'],
+    ['Overdue',overdue,'var(--danger)'],
+  ].map(([lbl,num,col])=>`<div class="stat-card"><div class="stat-num" style="color:${col}">${num}</div><div class="stat-lbl">${lbl}</div></div>`).join('');
 }
 function updateInboxBadge() {
-  const n = deadlines.filter(d => d.status === 'submitted').length;
-  const badge = document.getElementById('inboxBadge');
-  badge.textContent = n;
-  badge.style.display = n > 0 ? '' : 'none';
+  const n=deadlines.filter(d=>d.status==='submitted').length;
+  const b=document.getElementById('inboxBadge'); b.textContent=n; b.style.display=n>0?'':'none';
 }
 function setFilter(f) {
-  currentFilter = f;
-  document.getElementById('filterAll').classList.toggle('active', f==='all');
-  document.getElementById('filterPending').classList.toggle('active', f==='submitted');
-  document.getElementById('filterApproved').classList.toggle('active', f==='approved');
+  currentFilter=f;
+  document.getElementById('filterAll').classList.toggle('active',f==='all');
+  document.getElementById('filterPending').classList.toggle('active',f==='submitted');
+  document.getElementById('filterApproved').classList.toggle('active',f==='approved');
   renderInboxTable();
 }
 function renderInboxTable() {
-  let rows = deadlines.filter(d => d.status !== 'pending' && d.status !== 'overdue');
-  if (currentFilter === 'submitted') rows = deadlines.filter(d => d.status === 'submitted');
-  else if (currentFilter === 'approved') rows = deadlines.filter(d => d.status === 'approved');
-  const tbody = document.getElementById('inboxTableBody');
-  if (rows.length === 0) {
-    tbody.innerHTML = `<tr><td colspan="8"><div class="empty"><i class="ti ti-inbox"></i><p>No submissions yet</p></div></td></tr>`; return;
-  }
-  tbody.innerHTML = rows.map(d => `<tr>
-    <td style="font-weight:500">${d.member||'—'}</td>
-    <td style="color:var(--text2);font-size:12px">${d.memberEmail||'—'}</td>
+  let rows=currentFilter==='submitted'?deadlines.filter(d=>d.status==='submitted'):currentFilter==='approved'?deadlines.filter(d=>d.status==='approved'):deadlines.filter(d=>d.status!=='pending'&&d.status!=='overdue');
+  const tbody=document.getElementById('inboxTableBody');
+  if(!rows.length){tbody.innerHTML=`<tr><td colspan="8"><div class="empty"><i class="ti ti-inbox"></i><p>No submissions yet</p></div></td></tr>`;return;}
+  tbody.innerHTML=rows.map(d=>`<tr>
+    <td style="font-weight:600">${d.member||'—'}</td>
+    <td style="color:var(--text3);font-size:11px">${d.memberEmail||'—'}</td>
     <td><span class="code-pill">${ev(d.eventId)?.code}</span></td>
     <td>${d.name}</td>
     <td>${fmtDate(d.submitted)}</td>
-    <td style="max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--text2)">${d.note||'—'}</td>
+    <td style="max-width:150px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--text3)">${d.note||'—'}</td>
     <td><span class="tag ${d.status}">${d.status==='approved'?'✓ Approved':'Submitted'}</span></td>
     <td style="text-align:right;white-space:nowrap">
       ${d.status==='submitted'?`<button class="act-btn approve" onclick="approveItem('${d.id}')"><i class="ti ti-check"></i> Approve</button>`:''}
@@ -726,89 +822,64 @@ function renderInboxTable() {
   </tr>`).join('');
 }
 function approveItem(id) {
-  const dl = deadlines.find(d => d.id === id);
-  dl.status = 'approved';
-  save();
+  const dl=deadlines.find(d=>d.id===id); dl.status='approved'; save();
   renderOfficerStats(); renderInboxTable(); renderMemberDeadlines(); updateInboxBadge();
-  showToast(`Approved "${dl.name}"`, 'ti-circle-check', '#1D9E75');
+  showToast(`Approved "${dl.name}"`, 'ti-circle-check','var(--success)');
 }
 function renderDeadlinesTable() {
-  const filterEvId = document.getElementById('filterEvent').value;
-  const rows = filterEvId ? deadlines.filter(d => d.eventId === filterEvId) : deadlines;
-  const card = document.getElementById('deadlinesCard');
-  if (rows.length === 0) {
-    card.innerHTML = `<div class="empty"><i class="ti ti-calendar-off"></i><p>No deadlines yet. Add one above.</p></div>`; return;
-  }
-  card.innerHTML = `<div style="overflow-x:auto"><table class="sub-table">
+  const f=document.getElementById('filterEvent').value;
+  const rows=f?deadlines.filter(d=>d.eventId===f):deadlines;
+  const card=document.getElementById('deadlinesCard');
+  if(!rows.length){card.innerHTML=`<div class="empty"><i class="ti ti-calendar-off"></i><p>No deadlines yet. Add one above.</p></div>`;return;}
+  card.innerHTML=`<div style="overflow-x:auto"><table class="sub-table">
     <thead><tr><th>Event</th><th>Checkpoint</th><th>Due</th><th>Status</th><th></th></tr></thead>
-    <tbody>${rows.map(d => `<tr>
+    <tbody>${rows.map(d=>`<tr>
       <td><span class="code-pill">${ev(d.eventId)?.code}</span></td>
-      <td style="font-weight:500">${d.name}</td>
+      <td style="font-weight:600">${d.name}</td>
       <td>${fmtDate(d.due)}</td>
       <td><span class="tag ${d.status}">${{approved:'✓ Approved',submitted:'Submitted',overdue:'Overdue',pending:'Pending'}[d.status]}</span></td>
-      <td style="text-align:right">
-        <button class="act-btn" onclick="deleteDl('${d.id}')" style="color:#A32D2D;border-color:#f5c1c1"><i class="ti ti-trash"></i></button>
-      </td>
+      <td style="text-align:right"><button class="act-btn" onclick="deleteDl('${d.id}')" style="color:var(--danger);border-color:rgba(232,64,64,0.3)"><i class="ti ti-trash"></i></button></td>
     </tr>`).join('')}</tbody>
   </table></div>`;
 }
 function openAddDeadline() { openOverlay('addDlOverlay'); }
 function saveDeadline() {
-  const eventId = document.getElementById('dlEventSel').value;
-  const name = document.getElementById('dlNameInput').value.trim();
-  const due = document.getElementById('dlDateInput').value;
-  if (!eventId || !name || !due) { showToast('Please fill in all fields.','ti-alert-circle','#C8102E'); return; }
-  deadlines.push({ id:'d'+Date.now(), eventId, name, due, status:'pending', member:null, memberEmail:null, submitted:null, note:'' });
-  save();
-  closeOverlay('addDlOverlay');
-  document.getElementById('dlNameInput').value = '';
-  document.getElementById('dlDateInput').value = '';
+  const eventId=document.getElementById('dlEventSel').value, name=document.getElementById('dlNameInput').value.trim(), due=document.getElementById('dlDateInput').value;
+  if(!eventId||!name||!due){showToast('Please fill in all fields.','ti-alert-circle','var(--danger)');return;}
+  deadlines.push({id:'d'+Date.now(),eventId,name,due,status:'pending',member:null,memberEmail:null,submitted:null,note:''});
+  save(); closeOverlay('addDlOverlay');
+  document.getElementById('dlNameInput').value=''; document.getElementById('dlDateInput').value='';
   renderOfficerStats(); renderDeadlinesTable();
-  showToast('Deadline added!', 'ti-circle-check', '#1D9E75');
+  showToast('Deadline added!','ti-circle-check','var(--success)');
 }
 function deleteDl(id) {
-  if (!confirm('Delete this deadline?')) return;
-  deadlines = deadlines.filter(d => d.id !== id);
-  save();
+  if(!confirm('Delete this deadline?')) return;
+  deadlines=deadlines.filter(d=>d.id!==id); save();
   renderOfficerStats(); renderDeadlinesTable(); renderInboxTable(); renderMemberDeadlines();
-  showToast('Deadline removed.', 'ti-trash', '#6B6966');
+  showToast('Deadline removed.','ti-trash','var(--text3)');
 }
-
-// ─── EMAIL ────────────────────────────────────────────────────────────────────
 function openEmail(dlId) {
-  const dl = deadlines.find(d => d.id === dlId);
-  const e = ev(dl.eventId);
-  document.getElementById('emailSub').textContent = `${dl.member||'Member'} — ${e.code}`;
-  document.getElementById('emailTo').value = dl.memberEmail || '';
-  document.getElementById('emailSubject').value = `DECA ${e.code} — ${dl.name}`;
-  document.getElementById('emailBody').value = `Hi ${dl.member||'there'},\n\nFollowing up on your ${e.code} submission for "${dl.name}".\n\n`;
+  const dl=deadlines.find(d=>d.id===dlId), e=ev(dl.eventId);
+  document.getElementById('emailSub').textContent=`${dl.member||'Member'} — ${e.code}`;
+  document.getElementById('emailTo').value=dl.memberEmail||'';
+  document.getElementById('emailSubject').value=`DECA ${e.code} — ${dl.name}`;
+  document.getElementById('emailBody').value=`Hi ${dl.member||'there'},\n\nFollowing up on your ${e.code} submission for "${dl.name}".\n\n`;
   openOverlay('emailOverlay');
 }
 function sendEmail() {
-  const to = document.getElementById('emailTo').value;
-  const sub = encodeURIComponent(document.getElementById('emailSubject').value);
-  const body = encodeURIComponent(document.getElementById('emailBody').value);
-  window.open(`mailto:${to}?subject=${sub}&body=${body}`);
-  closeOverlay('emailOverlay');
+  const to=document.getElementById('emailTo').value, sub=encodeURIComponent(document.getElementById('emailSubject').value), body=encodeURIComponent(document.getElementById('emailBody').value);
+  window.open(`mailto:${to}?subject=${sub}&body=${body}`); closeOverlay('emailOverlay');
 }
-
-// ─── OVERLAYS ─────────────────────────────────────────────────────────────────
 function openOverlay(id) { document.getElementById(id).classList.add('open'); }
 function closeOverlay(id) { document.getElementById(id).classList.remove('open'); }
-document.addEventListener('click', e => {
-  ['subOverlay','addDlOverlay','emailOverlay'].forEach(id => {
-    if (e.target === document.getElementById(id)) closeOverlay(id);
-  });
-});
+document.addEventListener('click', e => { ['subOverlay','addDlOverlay','emailOverlay'].forEach(id=>{ if(e.target===document.getElementById(id)) closeOverlay(id); }); });
 
-// ─── TOAST ────────────────────────────────────────────────────────────────────
 let toastTimer;
-function showToast(msg, icon='ti-circle-check', iconColor='#1D9E75') {
+function showToast(msg, icon='ti-circle-check', iconColor='var(--success)') {
   clearTimeout(toastTimer);
-  const t = document.getElementById('toast');
-  t.innerHTML = `<i class="ti ${icon}" style="color:${iconColor}"></i> ${msg}`;
-  t.classList.add('show');
-  toastTimer = setTimeout(() => t.classList.remove('show'), 2800);
+  const t=document.getElementById('toast');
+  t.innerHTML=`<i class="ti ${icon}" style="color:${iconColor}"></i> ${msg}`;
+  t.classList.add('show'); toastTimer=setTimeout(()=>t.classList.remove('show'),2800);
 }
 </script>
 </body>
