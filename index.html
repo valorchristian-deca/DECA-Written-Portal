@@ -198,7 +198,35 @@
   .view.active { display: block; }
   .loading-row { padding: 2rem; text-align: center; color: var(--text3); font-size: 13px; }
 
-  @media (max-width: 700px) { .sidebar { display: none; } .stat-grid { grid-template-columns: repeat(2,1fr); } }
+  /* EVENT GRID */
+  .event-grid-wrap { padding: 0; }
+  .cat-label { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text3); margin: 1.5rem 0 0.6rem; }
+  .cat-label:first-child { margin-top: 0; }
+  .event-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 10px; margin-bottom: 0.25rem; }
+  .event-tile {
+    background: var(--navy-mid); border: 1px solid var(--navy-border);
+    border-radius: var(--radius-lg); padding: 1.25rem 1rem;
+    cursor: pointer; transition: all 0.15s;
+    display: flex; flex-direction: column; align-items: flex-start; gap: 10px;
+    position: relative; overflow: hidden;
+  }
+  .event-tile:hover { border-color: var(--deca-blue); background: var(--navy-light); transform: translateY(-1px); box-shadow: 0 4px 16px rgba(0,0,0,0.3); }
+  .event-tile-code { font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 700; color: var(--col-blue); background: rgba(0,83,155,0.2); padding: 3px 8px; border-radius: 4px; letter-spacing: 0.06em; }
+  .event-tile-name { font-size: 13px; font-weight: 600; color: var(--text); line-height: 1.35; }
+  .event-tile-dl { font-size: 11px; color: var(--text3); margin-top: auto; }
+  .event-tile-dot { position: absolute; top: 10px; right: 10px; width: 7px; height: 7px; border-radius: 50%; }
+  .event-tile.has-pending .event-tile-dot { background: var(--gold); }
+  .event-tile.has-approved .event-tile-dot { background: var(--success); }
+  .event-tile.cat-pm { border-left: 3px solid #F5A800; }
+  .event-tile.cat-or { border-left: 3px solid #E84040; }
+  .event-tile.cat-en { border-left: 3px solid #22C97A; }
+  .event-tile.cat-im { border-left: 3px solid #A855F7; }
+  .event-tile.cat-ps { border-left: 3px solid #4E9DC9; }
+  .back-btn { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; color: var(--text3); cursor: pointer; background: none; border: none; font-family: 'Inter', sans-serif; padding: 0; margin-bottom: 1.25rem; transition: color 0.12s; }
+  .back-btn:hover { color: var(--text); }
+
+  @media (max-width: 700px) { .sidebar { display: none; } .stat-grid { grid-template-columns: repeat(2,1fr); } .event-grid { grid-template-columns: repeat(auto-fill, minmax(130px,1fr)); } }
+    @media (max-width: 700px) { .sidebar { display: none; } .stat-grid { grid-template-columns: repeat(2,1fr); } }
 </style>
 </head>
 <body>
@@ -255,13 +283,11 @@
     <main class="main">
       <!-- MEMBER -->
       <div id="memberView" class="view active">
-        <div class="topbar"><div><div class="topbar-title">My Event</div><div class="topbar-sub">Select your event to view deadlines and submit work</div></div></div>
-        <div class="content">
-          <div class="gold-line"></div>
-          <div class="event-picker">
-            <div class="picker-label">Your event</div>
-            <select id="eventSelect" onchange="renderMemberDeadlines()"><option value="">— Select your event —</option></select>
-          </div>
+        <div class="topbar" id="memberTopbar">
+          <div><div class="topbar-title">Written Events</div><div class="topbar-sub">Select your event to view deadlines and submit work</div></div>
+        </div>
+        <div class="content" style="max-width:100%">
+          <div id="eventGrid"></div>
           <div id="memberDeadlines"></div>
         </div>
       </div>
@@ -451,10 +477,10 @@ function signOut() {
 
 // ─── INIT ─────────────────────────────────────────────────────────────────────
 function init() {
-  ['eventSelect','dlEventSel','filterEvent'].forEach(sid => {
+  ['dlEventSel','filterEvent'].forEach(sid => {
     const sel = document.getElementById(sid);
     if (!sel) return;
-    sel.innerHTML = sid==='filterEvent' ? '<option value="">All events</option>' : '<option value="">— Select your event —</option>';
+    sel.innerHTML = sid==='filterEvent' ? '<option value="">All events</option>' : '<option value="">— Select event —</option>';
     EVENTS.forEach(e => { const o=document.createElement('option'); o.value=e.id; o.textContent=`${e.code} — ${e.name}`; sel.appendChild(o); });
   });
   loadSubmissions();
@@ -477,7 +503,7 @@ async function loadSubmissions() {
   renderInboxTable();
   renderDeadlinesTable();
   updateInboxBadge();
-  renderMemberDeadlines();
+  renderEventGrid();
 }
 
 // ─── ROLE / NAV ───────────────────────────────────────────────────────────────
@@ -496,8 +522,47 @@ function showOfficerTab(t) { showView(t==='inbox'?'officerInboxView':'officerDea
 function highlightNav(idx) { document.querySelectorAll('#officerNav .nav-item').forEach((b,i)=>b.classList.toggle('active',i===idx)); }
 
 // ─── MEMBER VIEW ──────────────────────────────────────────────────────────────
-function renderMemberDeadlines() {
-  const eventId = document.getElementById('eventSelect').value;
+function renderEventGrid() {
+  const grid = document.getElementById('eventGrid');
+  const cats = [
+    { label: 'Project Management', key: 'pm', ids: ['pmbs','pmcd','pmca','pmcg','pmfl','pmsp'] },
+    { label: 'Operations Research', key: 'or', ids: ['bor','bmor','for','htor','seor'] },
+    { label: 'Entrepreneurship', key: 'en', ids: ['ebg','efb','eib','eip','ibp','esb'] },
+    { label: 'Integrated Marketing', key: 'im', ids: ['imce','imcp','imcs'] },
+    { label: 'Professional Selling', key: 'ps', ids: ['fce','htps','pse'] },
+  ];
+  let html = '<div class="event-grid-wrap">';
+  cats.forEach(cat => {
+    html += `<div class="cat-label">${cat.label}</div><div class="event-grid">`;
+    cat.ids.forEach(id => {
+      const e = ev(id);
+      const dls = deadlines.filter(d => d.eventId === id);
+      const mySubs = allSubmissions.filter(s => s.event_id === id && s.member_email === currentUser.email);
+      const hasApproved = mySubs.some(s => s.status === 'approved');
+      const hasPending = mySubs.some(s => s.status === 'submitted');
+      const dotClass = hasApproved ? 'has-approved' : hasPending ? 'has-pending' : '';
+      html += `<div class="event-tile cat-${cat.key} ${dotClass}" onclick="selectEvent('${id}')">
+        <div class="event-tile-dot"></div>
+        <div class="event-tile-code">${e.code}</div>
+        <div class="event-tile-name">${e.name}</div>
+        <div class="event-tile-dl">${dls.length} deadline${dls.length!==1?'s':''}</div>
+      </div>`;
+    });
+    html += '</div>';
+  });
+  html += '</div>';
+  grid.innerHTML = html;
+  document.getElementById('memberDeadlines').innerHTML = '';
+  document.getElementById('memberTopbar').innerHTML = '<div><div class="topbar-title">Written Events</div><div class="topbar-sub">Select your event to view deadlines and submit work</div></div>';
+}
+
+function selectEvent(eventId) {
+  document.getElementById('eventGrid').innerHTML = '';
+  document.getElementById('memberTopbar').innerHTML = `<div style="display:flex;align-items:center;gap:12px"><button class="back-btn" onclick="renderEventGrid()"><i class="ti ti-arrow-left"></i> All events</button></div><div><div class="topbar-title">${ev(eventId).name}</div><div class="topbar-sub">${ev(eventId).cat}</div></div>`;
+  renderMemberDeadlines(eventId);
+}
+
+function renderMemberDeadlines(eventId) {
   const cont = document.getElementById('memberDeadlines');
   if (!eventId) { cont.innerHTML=''; return; }
   const e = ev(eventId);
@@ -533,7 +598,6 @@ function renderMemberDeadlines() {
       }).join('');
 
   cont.innerHTML = `<div class="card">
-    <div class="card-header"><span class="code-pill">${e.code}</span><div><div class="card-title">${e.name}</div><div class="card-sub">${e.cat}</div></div></div>
     <div>${rows}</div>
   </div>`;
 }
