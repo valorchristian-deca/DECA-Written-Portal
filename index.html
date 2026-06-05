@@ -732,7 +732,7 @@ function openOfficerEvent(eventId){
         <td><span class="tag ${s.status}">${s.status==='approved'?'✓ Approved':'Submitted'}</span></td>
         <td style="text-align:right;white-space:nowrap">
           ${s.file_url?`<a href="${s.file_url}" target="_blank"><button class="act-btn view-file"><i class="ti ti-file-download"></i> View</button></a>`:''}
-          ${s.status==='submitted'?`<button class="act-btn approve" onclick="approveItem('${s.id}','${eventId}')"><i class="ti ti-check"></i> Approve</button>`:''}
+          ${s.status==='submitted'?`<button class="act-btn approve" onclick="approveItem('${s.id}','${eventId}')"><i class="ti ti-check"></i> Approve</button>`:''}          <button class="act-btn" onclick="deleteSubmission('${s.id}','${eventId}')" style="color:var(--danger);border-color:rgba(224,62,62,0.3)"><i class="ti ti-trash"></i></button>
           <button class="act-btn" onclick="openEmail('${s.id}')"><i class="ti ti-mail"></i></button>
         </td>
       </tr>`).join('')}</tbody>
@@ -853,7 +853,7 @@ function renderAllSubsTable(){
     <td><span class="tag ${s.status}">${s.status==='approved'?'✓ Approved':'Submitted'}</span></td>
     <td style="text-align:right;white-space:nowrap">
       ${s.file_url?`<a href="${s.file_url}" target="_blank"><button class="act-btn view-file"><i class="ti ti-file-download"></i> View</button></a>`:''}
-      ${s.status==='submitted'?`<button class="act-btn approve" onclick="approveItem('${s.id}')"><i class="ti ti-check"></i> Approve</button>`:''}
+      ${s.status==='submitted'?`<button class="act-btn approve" onclick="approveItem('${s.id}')"><i class="ti ti-check"></i> Approve</button>`:''}      <button class="act-btn" onclick="deleteSubmission('${s.id}')" style="color:var(--danger);border-color:rgba(224,62,62,0.3)"><i class="ti ti-trash"></i></button>
       <button class="act-btn" onclick="openEmail('${s.id}')"><i class="ti ti-mail"></i></button>
     </td>
   </tr>`).join('');
@@ -864,6 +864,15 @@ async function approveItem(id, eventId){
   await loadSubmissions();
   if(eventId) openOfficerEvent(eventId);
   showToast('Approved!','ti-circle-check','var(--success)');
+}
+
+async function deleteSubmission(id, eventId){
+  if(!confirm('Delete this submission? This cannot be undone.')) return;
+  const {error}=await sb.from('submissions').delete().eq('id',id);
+  if(error){ showToast('Error deleting — try again.','ti-alert-circle','var(--danger)'); return; }
+  await loadSubmissions();
+  if(eventId) openOfficerEvent(eventId);
+  showToast('Submission deleted.','ti-trash','var(--text3)');
 }
 
 // ── DEADLINES ─────────────────────────────────────────
