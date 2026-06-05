@@ -6,227 +6,238 @@
 <title>DECA Written Events Portal — Valor Christian</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
 <script src="https://accounts.google.com/gsi/client" async defer></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  :root {
-    --navy:       #0F1E35;
-    --navy-mid:   #162844;
-    --navy-light: #1E3558;
-    --navy-border:#243F65;
-    --deca-blue:  #00539B;
-    --col-blue:   #4E9DC9;
-    --gold:       #F5A800;
-    --white:      #FFFFFF;
-    --text:       #E8EDF2;
-    --text2:      #8DA4BE;
-    --text3:      #546E8A;
-    --success:    #22C97A;
-    --danger:     #E84040;
-    --radius:     8px;
-    --radius-lg:  12px;
-    --shadow:     0 1px 4px rgba(0,0,0,0.3);
-    --shadow-lg:  0 8px 32px rgba(0,0,0,0.5);
-  }
-  body { font-family: 'Inter', system-ui, sans-serif; background: var(--navy); color: var(--text); min-height: 100vh; font-size: 14px; line-height: 1.5; -webkit-font-smoothing: antialiased; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --navy:       #0B1829;
+  --navy-mid:   #111F33;
+  --navy-light: #182C47;
+  --navy-border:#1E3554;
+  --deca-blue:  #0057A8;
+  --col-blue:   #5BAFD6;
+  --gold:       #F5A800;
+  --white:      #F4F8FC;
+  --text:       #D8E6F0;
+  --text2:      #7A9BBB;
+  --text3:      #3D5A78;
+  --success:    #1DB87A;
+  --danger:     #E03E3E;
+  --r:          8px;
+  --rlg:        13px;
+  --sh:         0 1px 4px rgba(0,0,0,0.35);
+  --shlg:       0 12px 40px rgba(0,0,0,0.55);
+  --font-head:  'Syne', sans-serif;
+  --font-body:  'DM Sans', sans-serif;
+  --font-mono:  'DM Mono', monospace;
+}
 
-  /* LOGIN */
-  #loginScreen { min-height: 100vh; display: flex; align-items: center; justify-content: center; background: var(--navy); background-image: radial-gradient(ellipse at 20% 50%, rgba(0,83,155,0.15) 0%, transparent 60%), radial-gradient(ellipse at 80% 20%, rgba(245,168,0,0.08) 0%, transparent 50%); }
-  .login-card { background: var(--navy-mid); border: 1px solid var(--navy-border); border-radius: var(--radius-lg); padding: 2.75rem 2.25rem; width: min(420px, 92vw); text-align: center; box-shadow: var(--shadow-lg); }
-  .login-lockup { display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 2rem; }
-  .login-divider { width: 1px; height: 36px; background: var(--navy-border); }
-  .login-badge { background: var(--deca-blue); color: white; font-size: 12px; font-weight: 700; padding: 4px 10px; border-radius: 5px; letter-spacing: 0.1em; }
-  .login-school { font-size: 13px; font-weight: 600; color: var(--col-blue); letter-spacing: 0.03em; }
-  .login-title { font-size: 22px; font-weight: 700; color: var(--white); margin-bottom: 6px; letter-spacing: -0.02em; }
-  .login-sub { font-size: 13px; color: var(--text2); margin-bottom: 1.75rem; line-height: 1.65; }
-  .email-note { background: rgba(245,168,0,0.08); border: 1px solid rgba(245,168,0,0.2); border-radius: var(--radius); padding: 12px 14px; margin-bottom: 1.75rem; font-size: 12px; color: #D4A017; display: flex; align-items: flex-start; gap: 8px; text-align: left; }
-  .email-note i { font-size: 15px; flex-shrink: 0; margin-top: 1px; }
-  #googleBtn { display: flex; justify-content: center; }
-  .login-footer { font-size: 11px; color: var(--text3); margin-top: 1.25rem; }
+body { font-family: var(--font-body); background: var(--navy); color: var(--text); min-height: 100vh; font-size: 14px; line-height: 1.5; -webkit-font-smoothing: antialiased; }
 
-  /* APP */
-  #app { display: none; }
-  .app-inner { display: flex; min-height: 100vh; }
+/* ── LOGIN ─────────────────────────────────────────── */
+#loginScreen { min-height:100vh; display:flex; align-items:center; justify-content:center; background:var(--navy); background-image: radial-gradient(ellipse at 25% 60%, rgba(0,87,168,0.18) 0%, transparent 55%), radial-gradient(ellipse at 75% 15%, rgba(245,168,0,0.07) 0%, transparent 50%); }
+.login-card { background:var(--navy-mid); border:1px solid var(--navy-border); border-radius:var(--rlg); padding:2.75rem 2.25rem; width:min(420px,92vw); text-align:center; box-shadow:var(--shlg); }
+.login-lockup { display:flex; align-items:center; justify-content:center; gap:14px; margin-bottom:2rem; }
+.login-divider { width:1px; height:32px; background:var(--navy-border); }
+.login-badge { background:var(--deca-blue); color:white; font-family:var(--font-head); font-size:13px; font-weight:700; padding:5px 11px; border-radius:5px; letter-spacing:0.08em; }
+.login-school { font-family:var(--font-head); font-size:13px; font-weight:600; color:var(--col-blue); letter-spacing:0.04em; }
+.login-title { font-family:var(--font-head); font-size:24px; font-weight:800; color:var(--white); margin-bottom:6px; letter-spacing:-0.01em; }
+.login-sub { font-size:13px; color:var(--text2); margin-bottom:1.75rem; line-height:1.7; }
+.email-note { background:rgba(245,168,0,0.07); border:1px solid rgba(245,168,0,0.18); border-radius:var(--r); padding:12px 14px; margin-bottom:1.75rem; font-size:12px; color:#C9960F; display:flex; align-items:flex-start; gap:8px; text-align:left; }
+.email-note i { font-size:15px; flex-shrink:0; margin-top:1px; }
+#googleBtn { display:flex; justify-content:center; }
+.login-footer { font-size:11px; color:var(--text3); margin-top:1.25rem; }
 
-  /* SIDEBAR */
-  .sidebar { width: 232px; flex-shrink: 0; background: var(--navy-mid); border-right: 1px solid var(--navy-border); display: flex; flex-direction: column; position: sticky; top: 0; height: 100vh; overflow-y: auto; }
-  .sidebar-logo { padding: 1.25rem; border-bottom: 1px solid var(--navy-border); }
-  .logo-top { display: flex; align-items: center; gap: 8px; margin-bottom: 2px; }
-  .logo-deca { background: var(--deca-blue); color: white; font-size: 10px; font-weight: 700; padding: 3px 7px; border-radius: 4px; letter-spacing: 0.12em; }
-  .logo-name { font-size: 14px; font-weight: 700; color: var(--white); letter-spacing: -0.01em; }
-  .logo-sub { font-size: 11px; color: var(--text3); padding-left: 1px; }
-  .sidebar-sect { padding: 1.25rem 0.75rem 0.5rem; }
-  .sidebar-lbl { font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text3); padding: 0 0.5rem; margin-bottom: 3px; }
-  .nav-item { display: flex; align-items: center; gap: 8px; padding: 7px 10px; border-radius: var(--radius); font-size: 13px; color: var(--text2); cursor: pointer; transition: all 0.12s; border: none; background: none; width: 100%; text-align: left; font-family: 'Inter', sans-serif; font-weight: 500; }
-  .nav-item:hover { background: var(--navy-light); color: var(--text); }
-  .nav-item.active { background: rgba(0,83,155,0.25); color: var(--col-blue); }
-  .nav-item i { font-size: 15px; flex-shrink: 0; }
-  .nav-badge { margin-left: auto; font-size: 10px; font-weight: 700; background: var(--gold); color: var(--navy); padding: 1px 6px; border-radius: 20px; }
-  .sidebar-bottom { margin-top: auto; padding: 1rem 1.25rem; border-top: 1px solid var(--navy-border); }
-  .role-sw { display: flex; background: var(--navy); border-radius: var(--radius); padding: 3px; gap: 2px; margin-bottom: 10px; }
-  .role-btn { flex: 1; font-size: 11px; font-weight: 600; padding: 5px 8px; border: none; border-radius: 6px; cursor: pointer; font-family: 'Inter', sans-serif; color: var(--text3); background: transparent; transition: all 0.12s; }
-  .role-btn.active { background: var(--navy-light); color: var(--text); }
-  .user-row { display: flex; align-items: center; gap: 9px; margin-bottom: 8px; }
-  .user-av { width: 30px; height: 30px; border-radius: 50%; flex-shrink: 0; background: var(--deca-blue); color: white; font-size: 12px; font-weight: 700; display: flex; align-items: center; justify-content: center; overflow: hidden; }
-  .user-av img { width: 100%; height: 100%; object-fit: cover; }
-  .user-name { font-size: 12px; font-weight: 600; color: var(--text); }
-  .user-email { font-size: 10px; color: var(--text3); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 150px; }
-  .signout-btn { width: 100%; font-size: 11px; font-weight: 500; padding: 6px; border: 1px solid var(--navy-border); border-radius: var(--radius); background: transparent; cursor: pointer; color: var(--text3); font-family: 'Inter', sans-serif; display: flex; align-items: center; justify-content: center; gap: 5px; transition: all 0.12s; }
-  .signout-btn:hover { background: var(--navy-light); color: var(--text2); }
+/* ── APP ───────────────────────────────────────────── */
+#app { display:none; }
+.app-inner { display:flex; min-height:100vh; }
 
-  /* MAIN */
-  .main { flex: 1; overflow-x: hidden; }
-  .topbar { background: var(--navy-mid); border-bottom: 1px solid var(--navy-border); padding: 1rem 1.75rem; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 10; }
-  .topbar-title { font-size: 16px; font-weight: 700; color: var(--white); letter-spacing: -0.02em; }
-  .topbar-sub { font-size: 12px; color: var(--text3); margin-top: 1px; }
-  .content { padding: 1.5rem 1.75rem; max-width: 1000px; }
-  .gold-line { height: 2px; background: linear-gradient(90deg, var(--gold), transparent); border-radius: 2px; margin-bottom: 1.5rem; opacity: 0.6; }
+/* ── SIDEBAR ───────────────────────────────────────── */
+.sidebar { width:228px; flex-shrink:0; background:var(--navy-mid); border-right:1px solid var(--navy-border); display:flex; flex-direction:column; position:sticky; top:0; height:100vh; overflow-y:auto; }
+.sidebar-logo { padding:1.25rem 1.25rem 1rem; border-bottom:1px solid var(--navy-border); }
+.logo-top { display:flex; align-items:center; gap:8px; margin-bottom:3px; }
+.logo-badge { background:var(--deca-blue); color:white; font-family:var(--font-head); font-size:9px; font-weight:700; padding:3px 7px; border-radius:4px; letter-spacing:0.14em; }
+.logo-name { font-family:var(--font-head); font-size:14px; font-weight:700; color:var(--white); }
+.logo-sub { font-size:11px; color:var(--text3); }
+.sb-sect { padding:1.1rem 0.75rem 0.4rem; }
+.sb-lbl { font-size:9px; font-weight:600; letter-spacing:0.13em; text-transform:uppercase; color:var(--text3); padding:0 0.5rem; margin-bottom:3px; }
+.nav-item { display:flex; align-items:center; gap:8px; padding:7px 10px; border-radius:var(--r); font-size:13px; color:var(--text2); cursor:pointer; transition:all 0.12s; border:none; background:none; width:100%; text-align:left; font-family:var(--font-body); font-weight:500; }
+.nav-item:hover { background:var(--navy-light); color:var(--text); }
+.nav-item.active { background:rgba(0,87,168,0.22); color:var(--col-blue); }
+.nav-item i { font-size:15px; flex-shrink:0; }
+.nav-badge { margin-left:auto; font-size:10px; font-weight:700; background:var(--gold); color:var(--navy); padding:1px 6px; border-radius:20px; }
+.sb-bottom { margin-top:auto; padding:1rem 1.25rem; border-top:1px solid var(--navy-border); }
+.role-sw { display:flex; background:var(--navy); border-radius:var(--r); padding:3px; gap:2px; margin-bottom:10px; }
+.role-btn { flex:1; font-size:11px; font-weight:600; padding:5px 8px; border:none; border-radius:6px; cursor:pointer; font-family:var(--font-body); color:var(--text3); background:transparent; transition:all 0.12s; }
+.role-btn.active { background:var(--navy-light); color:var(--text); }
+.user-row { display:flex; align-items:center; gap:9px; margin-bottom:8px; }
+.user-av { width:30px; height:30px; border-radius:50%; flex-shrink:0; background:var(--deca-blue); color:white; font-size:12px; font-weight:700; display:flex; align-items:center; justify-content:center; overflow:hidden; }
+.user-av img { width:100%; height:100%; object-fit:cover; }
+.user-name { font-size:12px; font-weight:600; color:var(--text); }
+.user-email { font-size:10px; color:var(--text3); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:148px; }
+.signout-btn { width:100%; font-size:11px; font-weight:500; padding:6px; border:1px solid var(--navy-border); border-radius:var(--r); background:transparent; cursor:pointer; color:var(--text3); font-family:var(--font-body); display:flex; align-items:center; justify-content:center; gap:5px; transition:all 0.12s; }
+.signout-btn:hover { background:var(--navy-light); color:var(--text2); }
 
-  /* CARDS */
-  .card { background: var(--navy-mid); border: 1px solid var(--navy-border); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow); }
-  .card-header { padding: 1rem 1.25rem; border-bottom: 1px solid var(--navy-border); display: flex; align-items: center; gap: 10px; }
-  .card-title { font-size: 13px; font-weight: 600; color: var(--white); }
-  .card-sub { font-size: 11px; color: var(--text3); margin-top: 1px; }
+/* ── MAIN ──────────────────────────────────────────── */
+.main { flex:1; overflow-x:hidden; }
+.topbar { background:var(--navy-mid); border-bottom:1px solid var(--navy-border); padding:1rem 1.75rem; display:flex; align-items:center; justify-content:space-between; position:sticky; top:0; z-index:10; gap:12px; }
+.topbar-left { display:flex; align-items:center; gap:12px; min-width:0; }
+.topbar-title { font-family:var(--font-head); font-size:16px; font-weight:700; color:var(--white); letter-spacing:-0.01em; white-space:nowrap; }
+.topbar-sub { font-size:12px; color:var(--text3); margin-top:1px; }
+.content { padding:1.5rem 1.75rem; }
 
-  /* STATS */
-  .stat-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 10px; margin-bottom: 1.25rem; }
-  .stat-card { background: var(--navy-mid); border: 1px solid var(--navy-border); border-radius: var(--radius); padding: 1rem 1.25rem; }
-  .stat-num { font-size: 26px; font-weight: 700; line-height: 1; margin-bottom: 4px; letter-spacing: -0.03em; }
-  .stat-lbl { font-size: 11px; color: var(--text3); font-weight: 500; }
+/* ── GOLD ACCENT ───────────────────────────────────── */
+.gold-line { height:2px; background:linear-gradient(90deg,var(--gold),transparent); border-radius:2px; margin-bottom:1.5rem; opacity:0.5; }
 
-  /* DEADLINES */
-  .deadline-row { display: flex; align-items: center; gap: 12px; padding: 0.85rem 1.25rem; border-bottom: 1px solid var(--navy-border); cursor: pointer; transition: background 0.1s; }
-  .deadline-row:last-child { border-bottom: none; }
-  .deadline-row:hover { background: var(--navy-light); }
-  .deadline-row.locked { cursor: default; }
-  .deadline-row.locked:hover { background: transparent; }
-  .status-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
-  .status-dot.pending { background: var(--text3); }
-  .status-dot.submitted { background: var(--gold); }
-  .status-dot.approved { background: var(--success); }
-  .status-dot.overdue { background: var(--danger); }
-  .dl-name { font-size: 13px; font-weight: 600; color: var(--text); }
-  .dl-meta { font-size: 11px; color: var(--text3); margin-top: 2px; }
+/* ── EVENT GRID ────────────────────────────────────── */
+.cat-section { margin-bottom:2rem; }
+.cat-heading { font-family:var(--font-head); font-size:11px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--text3); margin-bottom:0.75rem; }
+.ev-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(170px,1fr)); gap:10px; }
+.ev-tile {
+  background:var(--navy-mid); border:1px solid var(--navy-border);
+  border-radius:var(--rlg); padding:1.1rem 1rem 0.9rem;
+  cursor:pointer; transition:all 0.15s;
+  display:flex; flex-direction:column; gap:8px;
+  position:relative; overflow:hidden;
+}
+.ev-tile::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; }
+.ev-tile.cat-pm::before { background:var(--gold); }
+.ev-tile.cat-or::before { background:var(--danger); }
+.ev-tile.cat-en::before { background:var(--success); }
+.ev-tile.cat-im::before { background:#A855F7; }
+.ev-tile.cat-ps::before { background:var(--col-blue); }
+.ev-tile:hover { border-color:var(--deca-blue); background:var(--navy-light); transform:translateY(-2px); box-shadow:0 6px 20px rgba(0,0,0,0.4); }
+.ev-tile-top { display:flex; align-items:center; justify-content:space-between; }
+.ev-tile-code { font-family:var(--font-mono); font-size:11px; font-weight:500; color:var(--col-blue); }
+.ev-tile-dot { width:7px; height:7px; border-radius:50%; background:transparent; }
+.ev-tile-dot.has-sub { background:var(--gold); }
+.ev-tile-dot.all-good { background:var(--success); }
+.ev-tile-name { font-family:var(--font-body); font-size:13px; font-weight:600; color:var(--text); line-height:1.3; flex:1; }
+.ev-tile-member { font-size:11px; color:var(--text3); font-style:italic; }
+.ev-tile-meta { font-size:11px; color:var(--text3); }
 
-  /* TAGS */
-  .tag { font-size: 10px; font-weight: 700; padding: 3px 8px; border-radius: 20px; white-space: nowrap; letter-spacing: 0.04em; text-transform: uppercase; }
-  .tag.pending { background: rgba(84,110,138,0.2); color: var(--text3); }
-  .tag.submitted { background: rgba(245,168,0,0.15); color: var(--gold); }
-  .tag.approved { background: rgba(34,201,122,0.15); color: var(--success); }
-  .tag.overdue { background: rgba(232,64,64,0.15); color: var(--danger); }
-  .days-badge { font-size: 11px; color: var(--text3); white-space: nowrap; margin-right: 4px; }
-  .days-badge.urgent { color: var(--danger); font-weight: 600; }
-  .days-badge.warn { color: var(--gold); font-weight: 600; }
+/* ── BACK BTN ──────────────────────────────────────── */
+.back-btn { display:inline-flex; align-items:center; gap:5px; font-size:12px; font-weight:500; color:var(--text3); cursor:pointer; background:none; border:none; font-family:var(--font-body); padding:0; transition:color 0.12s; flex-shrink:0; }
+.back-btn:hover { color:var(--text); }
 
-  /* TABLE */
-  .sub-table { width: 100%; border-collapse: collapse; }
-  .sub-table th { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text3); padding: 9px 14px; text-align: left; border-bottom: 1px solid var(--navy-border); background: var(--navy); }
-  .sub-table td { font-size: 12px; padding: 11px 14px; border-bottom: 1px solid var(--navy-border); color: var(--text); vertical-align: middle; }
-  .sub-table tr:last-child td { border-bottom: none; }
-  .sub-table tbody tr:hover td { background: var(--navy-light); }
-  .code-pill { font-size: 10px; font-weight: 700; letter-spacing: 0.06em; background: rgba(0,83,155,0.25); color: var(--col-blue); padding: 2px 7px; border-radius: 4px; font-family: 'JetBrains Mono', monospace; }
-  .act-btn { font-size: 11px; font-weight: 500; padding: 5px 10px; border: 1px solid var(--navy-border); border-radius: var(--radius); background: transparent; cursor: pointer; font-family: 'Inter', sans-serif; color: var(--text2); margin-left: 4px; transition: all 0.1s; display: inline-flex; align-items: center; gap: 4px; }
-  .act-btn:hover { background: var(--navy-light); color: var(--text); }
-  .act-btn.approve { border-color: rgba(34,201,122,0.3); color: var(--success); }
-  .act-btn.approve:hover { background: rgba(34,201,122,0.1); }
-  .act-btn.view-file { border-color: rgba(78,157,201,0.3); color: var(--col-blue); }
-  .act-btn.view-file:hover { background: rgba(78,157,201,0.1); }
+/* ── ASSIGN MEMBER STRIP ───────────────────────────── */
+.assign-strip { background:rgba(0,87,168,0.08); border:1px solid rgba(0,87,168,0.2); border-radius:var(--r); padding:10px 14px; margin-bottom:1.25rem; display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+.assign-strip label { font-size:12px; color:var(--text2); font-weight:500; white-space:nowrap; }
+.assign-strip input { flex:1; min-width:160px; font-size:13px; background:var(--navy); border:1px solid var(--navy-border); border-radius:var(--r); padding:7px 10px; color:var(--text); font-family:var(--font-body); outline:none; }
+.assign-strip input:focus { border-color:var(--deca-blue); }
+.assign-save-btn { font-size:12px; font-weight:600; padding:7px 14px; background:var(--deca-blue); color:white; border:none; border-radius:var(--r); cursor:pointer; font-family:var(--font-body); white-space:nowrap; transition:opacity 0.12s; }
+.assign-save-btn:hover { opacity:0.85; }
 
-  /* TOOLBAR */
-  .toolbar { display: flex; gap: 6px; margin-bottom: 1.25rem; flex-wrap: wrap; align-items: center; }
-  .btn { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; padding: 7px 14px; border-radius: var(--radius); cursor: pointer; border: 1px solid var(--navy-border); font-family: 'Inter', sans-serif; transition: all 0.12s; background: var(--navy-mid); color: var(--text2); }
-  .btn:hover { background: var(--navy-light); color: var(--text); }
-  .btn:disabled { opacity: 0.5; cursor: not-allowed; }
-  .btn.primary { background: var(--deca-blue); color: white; border-color: transparent; }
-  .btn.primary:hover { background: #0060B3; }
-  .btn.ghost { background: transparent; }
-  .btn.ghost.active { background: rgba(0,83,155,0.2); color: var(--col-blue); border-color: rgba(0,83,155,0.4); }
-  .btn i { font-size: 14px; }
+/* ── CARDS ─────────────────────────────────────────── */
+.card { background:var(--navy-mid); border:1px solid var(--navy-border); border-radius:var(--rlg); overflow:hidden; }
+.card-header { padding:1rem 1.25rem; border-bottom:1px solid var(--navy-border); display:flex; align-items:center; gap:10px; }
+.card-title { font-family:var(--font-head); font-size:13px; font-weight:700; color:var(--white); }
+.card-sub { font-size:11px; color:var(--text3); margin-top:1px; }
 
-  /* FORM */
-  .event-picker { margin-bottom: 1.5rem; }
-  .picker-label { font-size: 10px; font-weight: 700; color: var(--text3); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 7px; }
-  select, input[type="text"], input[type="date"], textarea { font-family: 'Inter', sans-serif; font-size: 13px; color: var(--text); background: var(--navy); border: 1px solid var(--navy-border); border-radius: var(--radius); padding: 9px 12px; outline: none; transition: border-color 0.12s; }
-  select:focus, input:focus, textarea:focus { border-color: var(--deca-blue); }
-  select { cursor: pointer; width: 100%; }
-  select option { background: var(--navy-mid); }
-  textarea { resize: vertical; }
+/* ── STATS ─────────────────────────────────────────── */
+.stat-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin-bottom:1.25rem; }
+.stat-card { background:var(--navy-mid); border:1px solid var(--navy-border); border-radius:var(--r); padding:1rem 1.25rem; }
+.stat-num { font-family:var(--font-head); font-size:28px; font-weight:800; line-height:1; margin-bottom:4px; letter-spacing:-0.03em; }
+.stat-lbl { font-size:11px; color:var(--text3); }
 
-  /* MODALS */
-  .overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 100; align-items: center; justify-content: center; backdrop-filter: blur(3px); }
-  .overlay.open { display: flex; }
-  .modal { background: var(--navy-mid); border-radius: var(--radius-lg); border: 1px solid var(--navy-border); width: min(520px, 92vw); max-height: 90vh; overflow-y: auto; padding: 1.75rem; box-shadow: var(--shadow-lg); }
-  .modal-head { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 1.5rem; }
-  .modal-title { font-size: 16px; font-weight: 700; color: var(--white); letter-spacing: -0.02em; }
-  .modal-sub { font-size: 12px; color: var(--text3); margin-top: 3px; }
-  .close-btn { background: var(--navy); border: 1px solid var(--navy-border); cursor: pointer; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--text3); font-size: 15px; flex-shrink: 0; transition: all 0.12s; }
-  .close-btn:hover { background: var(--navy-light); color: var(--text); }
-  .upload-zone { border: 1.5px dashed var(--navy-border); border-radius: var(--radius); padding: 2.5rem; text-align: center; cursor: pointer; transition: all 0.15s; margin-bottom: 1rem; }
-  .upload-zone:hover { border-color: var(--deca-blue); background: rgba(0,83,155,0.05); }
-  .upload-zone i { font-size: 30px; color: var(--text3); margin-bottom: 10px; display: block; }
-  .upload-text { font-size: 13px; color: var(--text3); line-height: 1.6; }
-  .upload-text strong { color: var(--text); }
-  .file-chip { display: none; align-items: center; gap: 8px; background: var(--navy); border: 1px solid var(--navy-border); border-radius: var(--radius); padding: 9px 14px; margin-bottom: 1rem; }
-  .file-chip.show { display: flex; }
-  .file-chip i { color: var(--col-blue); font-size: 17px; }
-  .file-chip-name { font-size: 12px; flex: 1; font-weight: 500; color: var(--text); }
-  .remove-file { background: none; border: none; cursor: pointer; color: var(--text3); font-size: 15px; padding: 0; }
-  .form-row { margin-bottom: 1rem; }
-  .form-label { display: block; font-size: 11px; font-weight: 700; color: var(--text3); margin-bottom: 5px; letter-spacing: 0.05em; text-transform: uppercase; }
-  .form-label span { font-weight: 400; text-transform: none; letter-spacing: 0; }
-  .form-row input, .form-row select, .form-row textarea { width: 100%; }
-  .form-row textarea { min-height: 90px; }
-  .modal-actions { display: flex; gap: 8px; justify-content: flex-end; margin-top: 1.5rem; }
+/* ── DEADLINE ROWS ─────────────────────────────────── */
+.deadline-row { display:flex; align-items:center; gap:12px; padding:0.85rem 1.25rem; border-bottom:1px solid var(--navy-border); cursor:pointer; transition:background 0.1s; }
+.deadline-row:last-child { border-bottom:none; }
+.deadline-row:hover { background:var(--navy-light); }
+.deadline-row.locked { cursor:default; }
+.deadline-row.locked:hover { background:transparent; }
+.status-dot { width:7px; height:7px; border-radius:50%; flex-shrink:0; }
+.status-dot.pending { background:var(--text3); }
+.status-dot.submitted { background:var(--gold); }
+.status-dot.approved { background:var(--success); }
+.status-dot.overdue { background:var(--danger); }
+.dl-name { font-size:13px; font-weight:600; color:var(--text); }
+.dl-meta { font-size:11px; color:var(--text3); margin-top:2px; }
 
-  /* PROGRESS */
-  .progress-bar { height: 3px; background: var(--navy-border); border-radius: 2px; overflow: hidden; margin-bottom: 1rem; display: none; }
-  .progress-bar.show { display: block; }
-  .progress-fill { height: 100%; background: var(--deca-blue); border-radius: 2px; transition: width 0.3s; width: 0%; }
+/* ── TAGS ──────────────────────────────────────────── */
+.tag { font-size:10px; font-weight:700; padding:3px 8px; border-radius:20px; white-space:nowrap; letter-spacing:0.05em; text-transform:uppercase; }
+.tag.pending { background:rgba(61,90,120,0.25); color:var(--text3); }
+.tag.submitted { background:rgba(245,168,0,0.13); color:var(--gold); }
+.tag.approved { background:rgba(29,184,122,0.13); color:var(--success); }
+.tag.overdue { background:rgba(224,62,62,0.13); color:var(--danger); }
+.days-badge { font-size:11px; color:var(--text3); white-space:nowrap; margin-right:4px; }
+.days-badge.urgent { color:var(--danger); font-weight:600; }
+.days-badge.warn { color:var(--gold); font-weight:600; }
 
-  /* TOAST */
-  .toast { position: fixed; bottom: 24px; right: 24px; z-index: 200; background: var(--navy-light); color: var(--text); border: 1px solid var(--navy-border); border-radius: var(--radius); padding: 11px 16px; font-size: 12px; font-weight: 500; display: flex; align-items: center; gap: 8px; transform: translateY(60px); opacity: 0; transition: all 0.2s cubic-bezier(0.34,1.56,0.64,1); pointer-events: none; box-shadow: var(--shadow-lg); }
-  .toast.show { transform: translateY(0); opacity: 1; }
-  .toast i { font-size: 15px; }
+/* ── TABLE ─────────────────────────────────────────── */
+.sub-table { width:100%; border-collapse:collapse; }
+.sub-table th { font-size:10px; font-weight:600; text-transform:uppercase; letter-spacing:0.09em; color:var(--text3); padding:9px 14px; text-align:left; border-bottom:1px solid var(--navy-border); background:var(--navy); }
+.sub-table td { font-size:12px; padding:11px 14px; border-bottom:1px solid var(--navy-border); color:var(--text); vertical-align:middle; }
+.sub-table tr:last-child td { border-bottom:none; }
+.sub-table tbody tr:hover td { background:var(--navy-light); }
+.code-pill { font-family:var(--font-mono); font-size:10px; font-weight:500; background:rgba(0,87,168,0.22); color:var(--col-blue); padding:2px 7px; border-radius:4px; letter-spacing:0.05em; }
+.act-btn { font-size:11px; font-weight:500; padding:5px 10px; border:1px solid var(--navy-border); border-radius:var(--r); background:transparent; cursor:pointer; font-family:var(--font-body); color:var(--text2); margin-left:4px; transition:all 0.1s; display:inline-flex; align-items:center; gap:4px; }
+.act-btn:hover { background:var(--navy-light); color:var(--text); }
+.act-btn.approve { border-color:rgba(29,184,122,0.3); color:var(--success); }
+.act-btn.approve:hover { background:rgba(29,184,122,0.08); }
+.act-btn.view-file { border-color:rgba(91,175,214,0.3); color:var(--col-blue); }
+.act-btn.view-file:hover { background:rgba(91,175,214,0.08); }
 
-  .empty { padding: 3rem; text-align: center; color: var(--text3); }
-  .empty i { font-size: 32px; display: block; margin-bottom: 10px; opacity: 0.4; }
-  .empty p { font-size: 13px; }
-  .view { display: none; }
-  .view.active { display: block; }
-  .loading-row { padding: 2rem; text-align: center; color: var(--text3); font-size: 13px; }
+/* ── TOOLBAR ───────────────────────────────────────── */
+.toolbar { display:flex; gap:6px; margin-bottom:1.25rem; flex-wrap:wrap; align-items:center; }
+.btn { display:inline-flex; align-items:center; gap:6px; font-size:12px; font-weight:600; padding:7px 14px; border-radius:var(--r); cursor:pointer; border:1px solid var(--navy-border); font-family:var(--font-body); transition:all 0.12s; background:var(--navy-mid); color:var(--text2); }
+.btn:hover { background:var(--navy-light); color:var(--text); }
+.btn:disabled { opacity:0.45; cursor:not-allowed; }
+.btn.primary { background:var(--deca-blue); color:white; border-color:transparent; }
+.btn.primary:hover { opacity:0.88; }
+.btn.ghost { background:transparent; }
+.btn.ghost.active { background:rgba(0,87,168,0.18); color:var(--col-blue); border-color:rgba(0,87,168,0.35); }
+.btn i { font-size:14px; }
 
-  /* EVENT GRID */
-  .event-grid-wrap { padding: 0; }
-  .cat-label { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text3); margin: 1.5rem 0 0.6rem; }
-  .cat-label:first-child { margin-top: 0; }
-  .event-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 10px; margin-bottom: 0.25rem; }
-  .event-tile {
-    background: var(--navy-mid); border: 1px solid var(--navy-border);
-    border-radius: var(--radius-lg); padding: 1.25rem 1rem;
-    cursor: pointer; transition: all 0.15s;
-    display: flex; flex-direction: column; align-items: flex-start; gap: 10px;
-    position: relative; overflow: hidden;
-  }
-  .event-tile:hover { border-color: var(--deca-blue); background: var(--navy-light); transform: translateY(-1px); box-shadow: 0 4px 16px rgba(0,0,0,0.3); }
-  .event-tile-code { font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 700; color: var(--col-blue); background: rgba(0,83,155,0.2); padding: 3px 8px; border-radius: 4px; letter-spacing: 0.06em; }
-  .event-tile-name { font-size: 13px; font-weight: 600; color: var(--text); line-height: 1.35; }
-  .event-tile-dl { font-size: 11px; color: var(--text3); margin-top: auto; }
-  .event-tile-dot { position: absolute; top: 10px; right: 10px; width: 7px; height: 7px; border-radius: 50%; }
-  .event-tile.has-pending .event-tile-dot { background: var(--gold); }
-  .event-tile.has-approved .event-tile-dot { background: var(--success); }
-  .event-tile.cat-pm { border-left: 3px solid #F5A800; }
-  .event-tile.cat-or { border-left: 3px solid #E84040; }
-  .event-tile.cat-en { border-left: 3px solid #22C97A; }
-  .event-tile.cat-im { border-left: 3px solid #A855F7; }
-  .event-tile.cat-ps { border-left: 3px solid #4E9DC9; }
-  .back-btn { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; color: var(--text3); cursor: pointer; background: none; border: none; font-family: 'Inter', sans-serif; padding: 0; margin-bottom: 1.25rem; transition: color 0.12s; }
-  .back-btn:hover { color: var(--text); }
+/* ── FORMS ─────────────────────────────────────────── */
+select, input[type="text"], input[type="date"], textarea { font-family:var(--font-body); font-size:13px; color:var(--text); background:var(--navy); border:1px solid var(--navy-border); border-radius:var(--r); padding:9px 12px; outline:none; transition:border-color 0.12s; }
+select:focus, input:focus, textarea:focus { border-color:var(--deca-blue); }
+select { cursor:pointer; width:100%; }
+select option { background:var(--navy-mid); }
+textarea { resize:vertical; }
+.form-row { margin-bottom:1rem; }
+.form-label { display:block; font-size:10px; font-weight:600; color:var(--text3); margin-bottom:5px; letter-spacing:0.08em; text-transform:uppercase; }
+.form-label span { font-weight:400; text-transform:none; letter-spacing:0; }
+.form-row input, .form-row select, .form-row textarea { width:100%; }
+.form-row textarea { min-height:90px; }
 
-  @media (max-width: 700px) { .sidebar { display: none; } .stat-grid { grid-template-columns: repeat(2,1fr); } .event-grid { grid-template-columns: repeat(auto-fill, minmax(130px,1fr)); } }
-    @media (max-width: 700px) { .sidebar { display: none; } .stat-grid { grid-template-columns: repeat(2,1fr); } }
+/* ── MODALS ────────────────────────────────────────── */
+.overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.6); z-index:100; align-items:center; justify-content:center; backdrop-filter:blur(4px); }
+.overlay.open { display:flex; }
+.modal { background:var(--navy-mid); border-radius:var(--rlg); border:1px solid var(--navy-border); width:min(520px,92vw); max-height:90vh; overflow-y:auto; padding:1.75rem; box-shadow:var(--shlg); }
+.modal-head { display:flex; align-items:flex-start; justify-content:space-between; margin-bottom:1.5rem; }
+.modal-title { font-family:var(--font-head); font-size:17px; font-weight:700; color:var(--white); }
+.modal-sub { font-size:12px; color:var(--text3); margin-top:3px; }
+.close-btn { background:var(--navy); border:1px solid var(--navy-border); cursor:pointer; width:28px; height:28px; border-radius:50%; display:flex; align-items:center; justify-content:center; color:var(--text3); font-size:15px; flex-shrink:0; transition:all 0.12s; }
+.close-btn:hover { background:var(--navy-light); color:var(--text); }
+.modal-actions { display:flex; gap:8px; justify-content:flex-end; margin-top:1.5rem; }
+.upload-zone { border:1.5px dashed var(--navy-border); border-radius:var(--r); padding:2.5rem; text-align:center; cursor:pointer; transition:all 0.15s; margin-bottom:1rem; }
+.upload-zone:hover { border-color:var(--deca-blue); background:rgba(0,87,168,0.04); }
+.upload-zone i { font-size:30px; color:var(--text3); margin-bottom:10px; display:block; }
+.upload-text { font-size:13px; color:var(--text3); line-height:1.6; }
+.upload-text strong { color:var(--text); }
+.file-chip { display:none; align-items:center; gap:8px; background:var(--navy); border:1px solid var(--navy-border); border-radius:var(--r); padding:9px 14px; margin-bottom:1rem; }
+.file-chip.show { display:flex; }
+.file-chip i { color:var(--col-blue); font-size:17px; }
+.file-chip-name { font-size:12px; flex:1; font-weight:500; color:var(--text); }
+.remove-file { background:none; border:none; cursor:pointer; color:var(--text3); font-size:15px; padding:0; }
+.progress-bar { height:3px; background:var(--navy-border); border-radius:2px; overflow:hidden; margin-bottom:1rem; display:none; }
+.progress-bar.show { display:block; }
+.progress-fill { height:100%; background:var(--deca-blue); border-radius:2px; transition:width 0.3s; width:0%; }
+
+/* ── TOAST ─────────────────────────────────────────── */
+.toast { position:fixed; bottom:24px; right:24px; z-index:200; background:var(--navy-light); color:var(--text); border:1px solid var(--navy-border); border-radius:var(--r); padding:11px 16px; font-size:12px; font-weight:500; display:flex; align-items:center; gap:8px; transform:translateY(60px); opacity:0; transition:all 0.22s cubic-bezier(0.34,1.56,0.64,1); pointer-events:none; box-shadow:var(--shlg); }
+.toast.show { transform:translateY(0); opacity:1; }
+.toast i { font-size:15px; }
+.empty { padding:3rem; text-align:center; color:var(--text3); }
+.empty i { font-size:32px; display:block; margin-bottom:10px; opacity:0.35; }
+.empty p { font-size:13px; }
+.view { display:none; }
+.view.active { display:block; }
+@media(max-width:700px){ .sidebar{display:none;} .stat-grid{grid-template-columns:repeat(2,1fr);} .ev-grid{grid-template-columns:repeat(auto-fill,minmax(140px,1fr));} }
 </style>
 </head>
 <body>
@@ -243,7 +254,7 @@
     <div class="login-sub">Track deadlines and submit your written work for Colorado DECA competition.</div>
     <div class="email-note">
       <i class="ti ti-alert-triangle"></i>
-      <span>Sign in with your <strong>Valor Christian or GoValor school email</strong> (@valorchristian.com or @govalor.com) — personal accounts will not be accepted.</span>
+      <span>Sign in with your <strong>Valor Christian or GoValor school email</strong> (@valorchristian.com or @govalor.com). Personal accounts will not be accepted.</span>
     </div>
     <div id="googleBtn"></div>
     <div class="login-footer">For chapter use only · Valor Christian DECA · Highlands Ranch, CO</div>
@@ -252,87 +263,112 @@
 
 <!-- APP -->
 <div id="app">
-  <div class="app-inner">
-    <aside class="sidebar">
-      <div class="sidebar-logo">
-        <div class="logo-top"><div class="logo-deca">DECA</div><div class="logo-name">Written Portal</div></div>
-        <div class="logo-sub">Valor Christian Eagles · Colorado</div>
-      </div>
-      <div class="sidebar-sect" id="memberNav">
-        <div class="sidebar-lbl">Member</div>
-        <button class="nav-item active" onclick="showMemberTab()"><i class="ti ti-file-text"></i> My event</button>
-      </div>
-      <div class="sidebar-sect" id="officerNav" style="display:none">
-        <div class="sidebar-lbl">Officer</div>
-        <button class="nav-item active" onclick="showOfficerTab('inbox')"><i class="ti ti-inbox"></i> Submission inbox <span class="nav-badge" id="inboxBadge" style="display:none">0</span></button>
-        <button class="nav-item" onclick="showOfficerTab('deadlines')"><i class="ti ti-calendar-event"></i> Manage deadlines</button>
-      </div>
-      <div class="sidebar-bottom">
-        <div class="role-sw" id="roleSwitcher" style="display:none">
-          <button class="role-btn active" id="btnMember" onclick="switchRole('member')">Member</button>
-          <button class="role-btn" id="btnOfficer" onclick="switchRole('officer')">Officer</button>
-        </div>
-        <div class="user-row">
-          <div class="user-av" id="userAvatar"></div>
-          <div style="min-width:0"><div class="user-name" id="userName"></div><div class="user-email" id="userEmail"></div></div>
-        </div>
-        <button class="signout-btn" onclick="signOut()"><i class="ti ti-logout"></i> Sign out</button>
-      </div>
-    </aside>
+<div class="app-inner">
 
-    <main class="main">
-      <!-- MEMBER -->
-      <div id="memberView" class="view active">
-        <div class="topbar" id="memberTopbar">
-          <div><div class="topbar-title">Written Events</div><div class="topbar-sub">Select your event to view deadlines and submit work</div></div>
-        </div>
-        <div class="content" style="max-width:100%">
-          <div id="eventGrid"></div>
-          <div id="memberDeadlines"></div>
-        </div>
-      </div>
-
-      <!-- OFFICER INBOX -->
-      <div id="officerInboxView" class="view">
-        <div class="topbar"><div><div class="topbar-title">Submission Inbox</div><div class="topbar-sub">Review and approve member submissions</div></div></div>
-        <div class="content">
-          <div class="gold-line"></div>
-          <div class="stat-grid" id="officerStats"></div>
-          <div class="toolbar">
-            <button class="btn ghost active" id="filterAll" onclick="setFilter('all')"><i class="ti ti-list"></i> All</button>
-            <button class="btn ghost" id="filterPending" onclick="setFilter('submitted')"><i class="ti ti-clock"></i> Awaiting review</button>
-            <button class="btn ghost" id="filterApproved" onclick="setFilter('approved')"><i class="ti ti-check"></i> Approved</button>
-          </div>
-          <div class="card"><div style="overflow-x:auto"><table class="sub-table">
-            <thead><tr><th>Member</th><th>Email</th><th>Event</th><th>Checkpoint</th><th>Submitted</th><th>Note</th><th>Status</th><th></th></tr></thead>
-            <tbody id="inboxTableBody"></tbody>
-          </table></div></div>
-        </div>
-      </div>
-
-      <!-- OFFICER DEADLINES -->
-      <div id="officerDeadlinesView" class="view">
-        <div class="topbar">
-          <div><div class="topbar-title">Manage Deadlines</div><div class="topbar-sub">Set submission checkpoints for each event</div></div>
-          <button class="btn primary" onclick="openAddDeadline()"><i class="ti ti-plus"></i> Add deadline</button>
-        </div>
-        <div class="content">
-          <div class="gold-line"></div>
-          <div class="toolbar">
-            <select id="filterEvent" onchange="renderDeadlinesTable()" style="width:auto;font-size:12px;padding:7px 12px"><option value="">All events</option></select>
-          </div>
-          <div class="card" id="deadlinesCard"></div>
-        </div>
-      </div>
-    </main>
+<!-- SIDEBAR -->
+<aside class="sidebar">
+  <div class="sidebar-logo">
+    <div class="logo-top"><div class="logo-badge">DECA</div><div class="logo-name">Written Portal</div></div>
+    <div class="logo-sub">Valor Christian · Colorado</div>
   </div>
+
+  <div class="sb-sect" id="memberNav">
+    <div class="sb-lbl">Member</div>
+    <button class="nav-item active" onclick="showMemberTab()"><i class="ti ti-layout-grid"></i> Events</button>
+  </div>
+
+  <div class="sb-sect" id="officerNav" style="display:none">
+    <div class="sb-lbl">Officer</div>
+    <button class="nav-item active" id="navGrid" onclick="showOfficerTab('grid')"><i class="ti ti-layout-grid"></i> Events</button>
+    <button class="nav-item" id="navAll" onclick="showOfficerTab('all')">
+      <i class="ti ti-inbox"></i> All submissions
+      <span class="nav-badge" id="inboxBadge" style="display:none">0</span>
+    </button>
+    <button class="nav-item" id="navDeadlines" onclick="showOfficerTab('deadlines')"><i class="ti ti-calendar-event"></i> Manage deadlines</button>
+  </div>
+
+  <div class="sb-bottom">
+    <div class="role-sw" id="roleSwitcher" style="display:none">
+      <button class="role-btn active" id="btnMember" onclick="switchRole('member')">Member</button>
+      <button class="role-btn" id="btnOfficer" onclick="switchRole('officer')">Officer</button>
+    </div>
+    <div class="user-row">
+      <div class="user-av" id="userAvatar"></div>
+      <div style="min-width:0"><div class="user-name" id="userName"></div><div class="user-email" id="userEmail"></div></div>
+    </div>
+    <button class="signout-btn" onclick="signOut()"><i class="ti ti-logout"></i> Sign out</button>
+  </div>
+</aside>
+
+<!-- MAIN -->
+<main class="main">
+
+  <!-- ── MEMBER: EVENT GRID ── -->
+  <div id="memberGridView" class="view active">
+    <div class="topbar"><div class="topbar-left"><div><div class="topbar-title">Written Events</div><div class="topbar-sub">Choose your event to see deadlines</div></div></div></div>
+    <div class="content" id="memberGridContent"></div>
+  </div>
+
+  <!-- ── MEMBER: DEADLINE DETAIL ── -->
+  <div id="memberDetailView" class="view">
+    <div class="topbar" id="memberDetailTopbar"></div>
+    <div class="content" id="memberDetailContent"></div>
+  </div>
+
+  <!-- ── OFFICER: EVENT GRID ── -->
+  <div id="officerGridView" class="view">
+    <div class="topbar"><div class="topbar-left"><div><div class="topbar-title">Events</div><div class="topbar-sub">Click an event to review its submissions</div></div></div></div>
+    <div class="content" id="officerGridContent"></div>
+  </div>
+
+  <!-- ── OFFICER: EVENT DETAIL ── -->
+  <div id="officerEventView" class="view">
+    <div class="topbar" id="officerEventTopbar"></div>
+    <div class="content" id="officerEventContent"></div>
+  </div>
+
+  <!-- ── OFFICER: ALL SUBMISSIONS ── -->
+  <div id="officerAllView" class="view">
+    <div class="topbar"><div><div class="topbar-title">All Submissions</div><div class="topbar-sub">Every submission across all events</div></div></div>
+    <div class="content">
+      <div class="gold-line"></div>
+      <div class="stat-grid" id="officerStats"></div>
+      <div class="toolbar">
+        <button class="btn ghost active" id="filterAll" onclick="setFilter('all')"><i class="ti ti-list"></i> All</button>
+        <button class="btn ghost" id="filterPending" onclick="setFilter('submitted')"><i class="ti ti-clock"></i> Awaiting review</button>
+        <button class="btn ghost" id="filterApproved" onclick="setFilter('approved')"><i class="ti ti-check"></i> Approved</button>
+      </div>
+      <div class="card"><div style="overflow-x:auto"><table class="sub-table">
+        <thead><tr><th>Member</th><th>Email</th><th>Event</th><th>Checkpoint</th><th>Submitted</th><th>Note</th><th>Status</th><th></th></tr></thead>
+        <tbody id="allSubsBody"></tbody>
+      </table></div></div>
+    </div>
+  </div>
+
+  <!-- ── OFFICER: DEADLINES ── -->
+  <div id="officerDeadlinesView" class="view">
+    <div class="topbar">
+      <div><div class="topbar-title">Manage Deadlines</div><div class="topbar-sub">Set checkpoints for each event</div></div>
+      <button class="btn primary" onclick="openAddDeadline()"><i class="ti ti-plus"></i> Add deadline</button>
+    </div>
+    <div class="content">
+      <div class="gold-line"></div>
+      <div class="toolbar">
+        <select id="filterEvent" onchange="renderDeadlinesTable()" style="width:auto;font-size:12px;padding:7px 12px"><option value="">All events</option></select>
+      </div>
+      <div class="card" id="deadlinesCard"></div>
+    </div>
+  </div>
+
+</main>
+</div>
 </div>
 
 <!-- SUBMIT MODAL -->
 <div class="overlay" id="subOverlay">
   <div class="modal">
     <div class="modal-head">
-      <div><div class="modal-title" id="panelTitle">Submit checkpoint</div><div class="modal-sub" id="panelSub"></div></div>
+      <div><div class="modal-title" id="panelTitle">Submit</div><div class="modal-sub" id="panelSub"></div></div>
       <button class="close-btn" onclick="closeOverlay('subOverlay')"><i class="ti ti-x"></i></button>
     </div>
     <input type="file" id="fileInput" accept=".pdf,.doc,.docx" style="display:none" onchange="handleFile(this)">
@@ -361,7 +397,7 @@
 <div class="overlay" id="addDlOverlay">
   <div class="modal">
     <div class="modal-head">
-      <div class="modal-title">Add a deadline</div>
+      <div class="modal-title">Add deadline</div>
       <button class="close-btn" onclick="closeOverlay('addDlOverlay')"><i class="ti ti-x"></i></button>
     </div>
     <div class="form-row"><label class="form-label">Event</label><select id="dlEventSel"></select></div>
@@ -394,7 +430,7 @@
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script>
-// ─── CONFIG ──────────────────────────────────────────────────────────────────
+// ── CONFIG ────────────────────────────────────────────
 const GOOGLE_CLIENT_ID = '482989502758-1hncj9oj7mfd5bbm2ifoh5dqmusdbjua.apps.googleusercontent.com';
 const SUPABASE_URL = 'https://wagzggrnmnkeehcnlqft.supabase.co';
 const SUPABASE_KEY = 'sb_publishable_AmbVnZOxEctRUzw87Ws7RQ_iRPckTcY';
@@ -406,318 +442,375 @@ const OFFICER_EMAILS = [
   'rubixmathmastermind@gmail.com',
 ];
 
-// ─── SUPABASE ─────────────────────────────────────────────────────────────────
 const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-// ─── EVENTS ───────────────────────────────────────────────────────────────────
-const EVENTS = [
-  {id:'pmbs',name:'Business Solutions Project',code:'PMBS',cat:'Project Management'},
-  {id:'pmcd',name:'Career Development Project',code:'PMCD',cat:'Project Management'},
-  {id:'pmca',name:'Community Awareness Project',code:'PMCA',cat:'Project Management'},
-  {id:'pmcg',name:'Community Giving Project',code:'PMCG',cat:'Project Management'},
-  {id:'pmfl',name:'Financial Literacy Project',code:'PMFL',cat:'Project Management'},
-  {id:'pmsp',name:'Sales Project',code:'PMSP',cat:'Project Management'},
-  {id:'bor',name:'Business Services Operations Research',code:'BOR',cat:'Operations Research'},
-  {id:'bmor',name:'Buying & Merchandising Operations Research',code:'BMOR',cat:'Operations Research'},
-  {id:'for',name:'Finance Operations Research',code:'FOR',cat:'Operations Research'},
-  {id:'htor',name:'Hospitality & Tourism Operations Research',code:'HTOR',cat:'Operations Research'},
-  {id:'seor',name:'Sports & Entertainment Marketing Operations Research',code:'SEOR',cat:'Operations Research'},
-  {id:'ebg',name:'Business Growth Plan',code:'EBG',cat:'Entrepreneurship'},
-  {id:'efb',name:'Franchise Business Plan',code:'EFB',cat:'Entrepreneurship'},
-  {id:'eib',name:'Independent Business Plan',code:'EIB',cat:'Entrepreneurship'},
-  {id:'eip',name:'Innovation Plan',code:'EIP',cat:'Entrepreneurship'},
-  {id:'ibp',name:'International Business Plan',code:'IBP',cat:'Entrepreneurship'},
-  {id:'esb',name:'Start-Up Business Plan',code:'ESB',cat:'Entrepreneurship'},
-  {id:'imce',name:'Integrated Marketing Campaign–Event',code:'IMCE',cat:'Integrated Marketing'},
-  {id:'imcp',name:'Integrated Marketing Campaign–Product',code:'IMCP',cat:'Integrated Marketing'},
-  {id:'imcs',name:'Integrated Marketing Campaign–Service',code:'IMCS',cat:'Integrated Marketing'},
-  {id:'fce',name:'Financial Consulting',code:'FCE',cat:'Professional Selling'},
-  {id:'htps',name:'Hospitality & Tourism Professional Selling',code:'HTPS',cat:'Professional Selling'},
-  {id:'pse',name:'Professional Selling',code:'PSE',cat:'Professional Selling'},
+// ── EVENTS ────────────────────────────────────────────
+const CATS = [
+  { key:'pm', label:'Project Management',   ids:['pmbs','pmcd','pmca','pmcg','pmfl','pmsp'] },
+  { key:'or', label:'Operations Research',  ids:['bor','bmor','for','htor','seor'] },
+  { key:'en', label:'Entrepreneurship',     ids:['ebg','efb','eib','eip','ibp','esb'] },
+  { key:'im', label:'Integrated Marketing', ids:['imce','imcp','imcs'] },
+  { key:'ps', label:'Professional Selling', ids:['fce','htps','pse'] },
 ];
+const EVENTS = [
+  {id:'pmbs',name:'Business Solutions Project',code:'PMBS'},
+  {id:'pmcd',name:'Career Development Project',code:'PMCD'},
+  {id:'pmca',name:'Community Awareness Project',code:'PMCA'},
+  {id:'pmcg',name:'Community Giving Project',code:'PMCG'},
+  {id:'pmfl',name:'Financial Literacy Project',code:'PMFL'},
+  {id:'pmsp',name:'Sales Project',code:'PMSP'},
+  {id:'bor', name:'Business Services Operations Research',code:'BOR'},
+  {id:'bmor',name:'Buying & Merchandising Operations Research',code:'BMOR'},
+  {id:'for', name:'Finance Operations Research',code:'FOR'},
+  {id:'htor',name:'Hospitality & Tourism Operations Research',code:'HTOR'},
+  {id:'seor',name:'Sports & Entertainment Marketing Operations Research',code:'SEOR'},
+  {id:'ebg', name:'Business Growth Plan',code:'EBG'},
+  {id:'efb', name:'Franchise Business Plan',code:'EFB'},
+  {id:'eib', name:'Independent Business Plan',code:'EIB'},
+  {id:'eip', name:'Innovation Plan',code:'EIP'},
+  {id:'ibp', name:'International Business Plan',code:'IBP'},
+  {id:'esb', name:'Start-Up Business Plan',code:'ESB'},
+  {id:'imce',name:'Integrated Marketing Campaign–Event',code:'IMCE'},
+  {id:'imcp',name:'Integrated Marketing Campaign–Product',code:'IMCP'},
+  {id:'imcs',name:'Integrated Marketing Campaign–Service',code:'IMCS'},
+  {id:'fce', name:'Financial Consulting',code:'FCE'},
+  {id:'htps',name:'Hospitality & Tourism Professional Selling',code:'HTPS'},
+  {id:'pse', name:'Professional Selling',code:'PSE'},
+];
+function ev(id){ return EVENTS.find(e=>e.id===id); }
+function catOf(id){ return CATS.find(c=>c.ids.includes(id)); }
 
-// Deadlines stored in localStorage (officer-managed, not user data)
-let deadlines = JSON.parse(localStorage.getItem('deca_deadlines') || '[]');
-function saveDeadlines() { localStorage.setItem('deca_deadlines', JSON.stringify(deadlines)); }
-
+// ── STATE ─────────────────────────────────────────────
 let currentUser = null;
 let currentDlId = null;
 let currentFilter = 'all';
 let allSubmissions = [];
+let deadlines = JSON.parse(localStorage.getItem('deca_deadlines')||'[]');
+let memberNames = JSON.parse(localStorage.getItem('deca_members')||'{}'); // {eventId: name}
+function saveDeadlines(){ localStorage.setItem('deca_deadlines', JSON.stringify(deadlines)); }
+function saveMembers(){ localStorage.setItem('deca_members', JSON.stringify(memberNames)); }
 
-// ─── GOOGLE AUTH ──────────────────────────────────────────────────────────────
-window.addEventListener('load', () => {
+// ── GOOGLE AUTH ───────────────────────────────────────
+window.addEventListener('load', ()=>{
   google.accounts.id.initialize({ client_id: GOOGLE_CLIENT_ID, callback: handleCredential });
-  google.accounts.id.renderButton(document.getElementById('googleBtn'), { theme: 'filled_blue', size: 'large', width: 320 });
+  google.accounts.id.renderButton(document.getElementById('googleBtn'), { theme:'filled_blue', size:'large', width:320 });
 });
-
-function handleCredential(response) {
-  const payload = JSON.parse(atob(response.credential.split('.')[1]));
-  currentUser = { name: payload.name, email: payload.email, picture: payload.picture, initials: payload.name.split(' ').map(n=>n[0]).join('').toUpperCase().slice(0,2) };
+function handleCredential(response){
+  const p = JSON.parse(atob(response.credential.split('.')[1]));
+  currentUser = { name:p.name, email:p.email, picture:p.picture, initials:p.name.split(' ').map(n=>n[0]).join('').toUpperCase().slice(0,2) };
   launchApp();
 }
-
-function launchApp() {
-  document.getElementById('loginScreen').style.display = 'none';
-  document.getElementById('app').style.display = 'block';
-  const av = document.getElementById('userAvatar');
-  av.innerHTML = currentUser.picture ? `<img src="${currentUser.picture}" alt="">` : currentUser.initials;
-  document.getElementById('userName').textContent = currentUser.name;
-  document.getElementById('userEmail').textContent = currentUser.email;
-  if (OFFICER_EMAILS.includes(currentUser.email)) document.getElementById('roleSwitcher').style.display = 'flex';
+function launchApp(){
+  document.getElementById('loginScreen').style.display='none';
+  document.getElementById('app').style.display='block';
+  const av=document.getElementById('userAvatar');
+  av.innerHTML=currentUser.picture?`<img src="${currentUser.picture}" alt="">`:`${currentUser.initials}`;
+  document.getElementById('userName').textContent=currentUser.name;
+  document.getElementById('userEmail').textContent=currentUser.email;
+  if(OFFICER_EMAILS.includes(currentUser.email)) document.getElementById('roleSwitcher').style.display='flex';
   init();
 }
-
-function signOut() {
+function signOut(){
   google.accounts.id.disableAutoSelect();
-  currentUser = null;
-  document.getElementById('app').style.display = 'none';
-  document.getElementById('loginScreen').style.display = 'flex';
+  currentUser=null;
+  document.getElementById('app').style.display='none';
+  document.getElementById('loginScreen').style.display='flex';
 }
 
-// ─── INIT ─────────────────────────────────────────────────────────────────────
-function init() {
-  ['dlEventSel','filterEvent'].forEach(sid => {
-    const sel = document.getElementById(sid);
-    if (!sel) return;
-    sel.innerHTML = sid==='filterEvent' ? '<option value="">All events</option>' : '<option value="">— Select event —</option>';
-    EVENTS.forEach(e => { const o=document.createElement('option'); o.value=e.id; o.textContent=`${e.code} — ${e.name}`; sel.appendChild(o); });
+// ── INIT ──────────────────────────────────────────────
+function init(){
+  ['dlEventSel','filterEvent'].forEach(sid=>{
+    const sel=document.getElementById(sid); if(!sel) return;
+    sel.innerHTML=sid==='filterEvent'?'<option value="">All events</option>':'<option value="">— Select event —</option>';
+    EVENTS.forEach(e=>{ const o=document.createElement('option'); o.value=e.id; o.textContent=`${e.code} — ${e.name}`; sel.appendChild(o); });
   });
   loadSubmissions();
 }
-
-// ─── HELPERS ──────────────────────────────────────────────────────────────────
-function fmtDate(d) {
-  if (!d) return '—';
-  const dt = new Date(d);
-  return `${['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][dt.getMonth()]} ${dt.getDate()}, ${dt.getFullYear()}`;
-}
-function daysUntil(d) { if (!d) return null; return Math.ceil((new Date(d) - new Date()) / 86400000); }
-function ev(id) { return EVENTS.find(e => e.id === id); }
-
-// ─── LOAD SUBMISSIONS FROM SUPABASE ──────────────────────────────────────────
-async function loadSubmissions() {
-  const { data, error } = await sb.from('submissions').select('*').order('created_at', { ascending: false });
-  if (!error) allSubmissions = data || [];
+async function loadSubmissions(){
+  const {data,error}=await sb.from('submissions').select('*').order('created_at',{ascending:false});
+  if(!error) allSubmissions=data||[];
   renderOfficerStats();
-  renderInboxTable();
+  renderAllSubsTable();
   renderDeadlinesTable();
   updateInboxBadge();
-  renderEventGrid();
+  renderMemberGrid();
+  renderOfficerGrid();
 }
 
-// ─── ROLE / NAV ───────────────────────────────────────────────────────────────
-function switchRole(role) {
-  const isMember = role === 'member';
-  document.getElementById('btnMember').classList.toggle('active', isMember);
-  document.getElementById('btnOfficer').classList.toggle('active', !isMember);
-  document.getElementById('memberNav').style.display = isMember ? 'block' : 'none';
-  document.getElementById('officerNav').style.display = isMember ? 'none' : 'block';
-  if (isMember) showView('memberView');
-  else { showView('officerInboxView'); highlightNav(0); }
+// ── HELPERS ───────────────────────────────────────────
+function fmtDate(d){
+  if(!d) return '—';
+  const dt=new Date(d);
+  return `${['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][dt.getMonth()]} ${dt.getDate()}, ${dt.getFullYear()}`;
 }
-function showView(id) { document.querySelectorAll('.view').forEach(v=>v.classList.remove('active')); document.getElementById(id).classList.add('active'); }
-function showMemberTab() { showView('memberView'); }
-function showOfficerTab(t) { showView(t==='inbox'?'officerInboxView':'officerDeadlinesView'); highlightNav(t==='inbox'?0:1); }
-function highlightNav(idx) { document.querySelectorAll('#officerNav .nav-item').forEach((b,i)=>b.classList.toggle('active',i===idx)); }
+function daysUntil(d){ if(!d) return null; return Math.ceil((new Date(d)-new Date())/86400000); }
 
-// ─── MEMBER VIEW ──────────────────────────────────────────────────────────────
-function renderEventGrid() {
-  const grid = document.getElementById('eventGrid');
-  const cats = [
-    { label: 'Project Management', key: 'pm', ids: ['pmbs','pmcd','pmca','pmcg','pmfl','pmsp'] },
-    { label: 'Operations Research', key: 'or', ids: ['bor','bmor','for','htor','seor'] },
-    { label: 'Entrepreneurship', key: 'en', ids: ['ebg','efb','eib','eip','ibp','esb'] },
-    { label: 'Integrated Marketing', key: 'im', ids: ['imce','imcp','imcs'] },
-    { label: 'Professional Selling', key: 'ps', ids: ['fce','htps','pse'] },
-  ];
-  let html = '<div class="event-grid-wrap">';
-  cats.forEach(cat => {
-    html += `<div class="cat-label">${cat.label}</div><div class="event-grid">`;
-    cat.ids.forEach(id => {
-      const e = ev(id);
-      const dls = deadlines.filter(d => d.eventId === id);
-      const mySubs = allSubmissions.filter(s => s.event_id === id && s.member_email === currentUser.email);
-      const hasApproved = mySubs.some(s => s.status === 'approved');
-      const hasPending = mySubs.some(s => s.status === 'submitted');
-      const dotClass = hasApproved ? 'has-approved' : hasPending ? 'has-pending' : '';
-      html += `<div class="event-tile cat-${cat.key} ${dotClass}" onclick="selectEvent('${id}')">
-        <div class="event-tile-dot"></div>
-        <div class="event-tile-code">${e.code}</div>
-        <div class="event-tile-name">${e.name}</div>
-        <div class="event-tile-dl">${dls.length} deadline${dls.length!==1?'s':''}</div>
+// ── ROLE/NAV ──────────────────────────────────────────
+function switchRole(role){
+  const isMember=role==='member';
+  document.getElementById('btnMember').classList.toggle('active',isMember);
+  document.getElementById('btnOfficer').classList.toggle('active',!isMember);
+  document.getElementById('memberNav').style.display=isMember?'block':'none';
+  document.getElementById('officerNav').style.display=isMember?'none':'block';
+  if(isMember){ showView('memberGridView'); }
+  else { showOfficerTab('grid'); }
+}
+function showView(id){ document.querySelectorAll('.view').forEach(v=>v.classList.remove('active')); document.getElementById(id).classList.add('active'); }
+function showMemberTab(){ showView('memberGridView'); }
+function showOfficerTab(t){
+  const map={grid:'officerGridView',all:'officerAllView',deadlines:'officerDeadlinesView',event:'officerEventView'};
+  showView(map[t]||'officerGridView');
+  document.querySelectorAll('#officerNav .nav-item').forEach(b=>b.classList.remove('active'));
+  const ids={grid:'navGrid',all:'navAll',deadlines:'navDeadlines'};
+  if(ids[t]) document.getElementById(ids[t])?.classList.add('active');
+}
+
+// ── MEMBER GRID ───────────────────────────────────────
+function renderMemberGrid(){
+  const cont=document.getElementById('memberGridContent');
+  let html='<div class="gold-line"></div>';
+  CATS.forEach(cat=>{
+    html+=`<div class="cat-section"><div class="cat-heading">${cat.label}</div><div class="ev-grid">`;
+    cat.ids.forEach(id=>{
+      const e=ev(id);
+      const dls=deadlines.filter(d=>d.eventId===id);
+      const mySubs=allSubmissions.filter(s=>s.event_id===id&&s.member_email===currentUser.email);
+      const hasApproved=mySubs.some(s=>s.status==='approved');
+      const hasSub=mySubs.some(s=>s.status==='submitted');
+      const dotCls=hasApproved?'all-good':hasSub?'has-sub':'';
+      html+=`<div class="ev-tile cat-${cat.key}" onclick="openMemberEvent('${id}')">
+        <div class="ev-tile-top"><span class="ev-tile-code">${e.code}</span><span class="ev-tile-dot ${dotCls}"></span></div>
+        <div class="ev-tile-name">${e.name}</div>
+        <div class="ev-tile-meta">${dls.length} deadline${dls.length!==1?'s':''}</div>
       </div>`;
     });
-    html += '</div>';
+    html+='</div></div>';
   });
-  html += '</div>';
-  grid.innerHTML = html;
-  document.getElementById('memberDeadlines').innerHTML = '';
-  document.getElementById('memberTopbar').innerHTML = '<div><div class="topbar-title">Written Events</div><div class="topbar-sub">Select your event to view deadlines and submit work</div></div>';
+  cont.innerHTML=html;
 }
 
-function selectEvent(eventId) {
-  document.getElementById('eventGrid').innerHTML = '';
-  document.getElementById('memberTopbar').innerHTML = `<div style="display:flex;align-items:center;gap:12px"><button class="back-btn" onclick="renderEventGrid()"><i class="ti ti-arrow-left"></i> All events</button></div><div><div class="topbar-title">${ev(eventId).name}</div><div class="topbar-sub">${ev(eventId).cat}</div></div>`;
-  renderMemberDeadlines(eventId);
+function openMemberEvent(eventId){
+  const e=ev(eventId);
+  document.getElementById('memberDetailTopbar').innerHTML=`
+    <div class="topbar-left">
+      <button class="back-btn" onclick="showView('memberGridView');renderMemberGrid()"><i class="ti ti-arrow-left"></i> All events</button>
+      <div style="width:1px;height:20px;background:var(--navy-border)"></div>
+      <div><div class="topbar-title">${e.name}</div></div>
+    </div>`;
+  renderMemberDetail(eventId);
+  showView('memberDetailView');
 }
 
-function renderMemberDeadlines(eventId) {
-  const cont = document.getElementById('memberDeadlines');
-  if (!eventId) { cont.innerHTML=''; return; }
-  const e = ev(eventId);
-  const dls = deadlines.filter(d => d.eventId === eventId);
+function renderMemberDetail(eventId){
+  const cont=document.getElementById('memberDetailContent');
+  const dls=deadlines.filter(d=>d.eventId===eventId);
+  const mySubs=allSubmissions.filter(s=>s.event_id===eventId&&s.member_email===currentUser.email);
+  if(!dls.length){ cont.innerHTML='<div class="card"><div class="empty"><i class="ti ti-calendar-off"></i><p>No deadlines set yet — check back soon.</p></div></div>'; return; }
+  const rows=dls.map(d=>{
+    const mySub=mySubs.find(s=>s.checkpoint_name===d.name);
+    const status=mySub?mySub.status:'pending';
+    const locked=status==='approved';
+    const days=daysUntil(d.due);
+    let daysHtml='';
+    if(!locked&&status!=='approved'){
+      if(days<0) daysHtml=`<span class="days-badge urgent">${Math.abs(days)}d overdue</span>`;
+      else if(days===0) daysHtml=`<span class="days-badge urgent">Due today</span>`;
+      else if(days<=3) daysHtml=`<span class="days-badge warn">${days}d left</span>`;
+      else daysHtml=`<span class="days-badge">${days}d left</span>`;
+    }
+    return `<div class="deadline-row ${locked?'locked':''}" onclick="${locked?'':` openSubmit('${d.id}','${eventId}')`}">
+      <span class="status-dot ${status}"></span>
+      <div style="flex:1">
+        <div class="dl-name">${d.name}</div>
+        <div class="dl-meta">Due ${fmtDate(d.due)}${mySub?` · Last submitted ${fmtDate(mySub.created_at)}`:''}</div>
+      </div>
+      ${daysHtml}
+      <span class="tag ${status}">${{approved:'✓ Approved',submitted:'Submitted',overdue:'Overdue',pending:'Pending'}[status]}</span>
+      ${!locked?`<span style="font-size:11px;color:var(--col-blue);margin-left:8px;white-space:nowrap">${status==='submitted'?'Resubmit':'Submit'} <i class="ti ti-chevron-right" style="font-size:11px"></i></span>`:''}
+    </div>`;
+  }).join('');
+  cont.innerHTML=`<div class="card"><div>${rows}</div></div>`;
+}
 
-  // Check which deadlines this user has submitted
-  const mySubmissions = allSubmissions.filter(s => s.member_email === currentUser.email && s.event_id === eventId);
+// ── OFFICER GRID ──────────────────────────────────────
+function renderOfficerGrid(){
+  const cont=document.getElementById('officerGridContent');
+  let html='<div class="gold-line"></div>';
+  CATS.forEach(cat=>{
+    html+=`<div class="cat-section"><div class="cat-heading">${cat.label}</div><div class="ev-grid">`;
+    cat.ids.forEach(id=>{
+      const e=ev(id);
+      const subs=allSubmissions.filter(s=>s.event_id===id);
+      const pending=subs.filter(s=>s.status==='submitted').length;
+      const member=memberNames[id]||'';
+      const dotCls=pending>0?'has-sub':subs.some(s=>s.status==='approved')?'all-good':'';
+      html+=`<div class="ev-tile cat-${cat.key}" onclick="openOfficerEvent('${id}')">
+        <div class="ev-tile-top"><span class="ev-tile-code">${e.code}</span><span class="ev-tile-dot ${dotCls}"></span></div>
+        <div class="ev-tile-name">${e.name}</div>
+        <div class="ev-tile-member">${member||'No member assigned'}</div>
+        <div class="ev-tile-meta">${subs.length} submission${subs.length!==1?'s':''}${pending>0?` · <span style="color:var(--gold)">${pending} pending</span>`:''}</div>
+      </div>`;
+    });
+    html+='</div></div>';
+  });
+  cont.innerHTML=html;
+}
 
-  const rows = dls.length === 0
-    ? `<div class="empty"><i class="ti ti-calendar-off"></i><p>No deadlines set yet — check back soon.</p></div>`
-    : dls.map(d => {
-        const mySub = mySubmissions.find(s => s.checkpoint_name === d.name);
-        const status = mySub ? mySub.status : (d.status || 'pending');
-        const days = daysUntil(d.due);
-        const locked = status === 'approved';
-        let daysHtml = '';
-        if (status==='pending'||status==='overdue') {
-          if (days<0) daysHtml=`<span class="days-badge urgent">${Math.abs(days)}d overdue</span>`;
-          else if (days===0) daysHtml=`<span class="days-badge urgent">Due today</span>`;
-          else if (days<=3) daysHtml=`<span class="days-badge warn">${days}d left</span>`;
-          else daysHtml=`<span class="days-badge">${days}d left</span>`;
-        }
-        return `<div class="deadline-row ${locked?'locked':''}"  onclick="${locked?'':` openSubmit('${d.id}')`}">
-          <span class="status-dot ${status}"></span>
-          <div style="flex:1">
-            <div class="dl-name">${d.name}</div>
-            <div class="dl-meta">Due ${fmtDate(d.due)}${mySub?` · Last submitted ${fmtDate(mySub.created_at)}`:''}</div>
-          </div>
-          ${daysHtml}
-          <span class="tag ${status}">${{approved:'✓ Approved',submitted:'Submitted',overdue:'Overdue',pending:'Pending'}[status]}</span>
-          ${!locked?`<span style="font-size:11px;color:var(--col-blue);margin-left:8px;white-space:nowrap">${status==='submitted'?'Resubmit':'Submit'} <i class="ti ti-chevron-right" style="font-size:11px"></i></span>`:''}
-        </div>`;
-      }).join('');
+function openOfficerEvent(eventId){
+  const e=ev(eventId);
+  const cat=catOf(eventId);
+  showView('officerEventView');
+  document.querySelectorAll('#officerNav .nav-item').forEach(b=>b.classList.remove('active'));
+  document.getElementById('officerEventTopbar').innerHTML=`
+    <div class="topbar-left">
+      <button class="back-btn" onclick="showOfficerTab('grid');renderOfficerGrid()"><i class="ti ti-arrow-left"></i> All events</button>
+      <div style="width:1px;height:20px;background:var(--navy-border)"></div>
+      <div><div class="topbar-title">${e.name}</div><div class="topbar-sub">${cat?.label||''}</div></div>
+    </div>
+    <button class="btn primary" onclick="openAddDeadline('${eventId}')"><i class="ti ti-plus"></i> Add deadline</button>`;
 
-  cont.innerHTML = `<div class="card">
-    <div>${rows}</div>
+  const subs=allSubmissions.filter(s=>s.event_id===eventId);
+  const dls=deadlines.filter(d=>d.eventId===eventId);
+  const memberName=memberNames[eventId]||'';
+
+  let html=`<div class="gold-line"></div>
+  <div class="assign-strip">
+    <label>Assigned member:</label>
+    <input type="text" id="assignInput_${eventId}" value="${memberName}" placeholder="Type member name...">
+    <button class="assign-save-btn" onclick="saveMember('${eventId}')">Save</button>
   </div>`;
+
+  // Deadlines with submission status
+  if(dls.length){
+    html+=`<div class="card" style="margin-bottom:1.25rem">
+      <div class="card-header"><i class="ti ti-calendar-event" style="color:var(--text3)"></i><div class="card-title">Deadlines</div></div>
+      <div>`;
+    dls.forEach(d=>{
+      const dlSubs=subs.filter(s=>s.checkpoint_name===d.name);
+      const hasPending=dlSubs.some(s=>s.status==='submitted');
+      html+=`<div style="display:flex;align-items:center;gap:12px;padding:0.85rem 1.25rem;border-bottom:1px solid var(--navy-border)">
+        <span class="status-dot ${hasPending?'submitted':dlSubs.length?'approved':'pending'}"></span>
+        <div style="flex:1"><div class="dl-name">${d.name}</div><div class="dl-meta">Due ${fmtDate(d.due)} · ${dlSubs.length} submission${dlSubs.length!==1?'s':''}</div></div>
+        <button class="act-btn" onclick="deleteDl('${d.id}')" style="color:var(--danger);border-color:rgba(224,62,62,0.3)"><i class="ti ti-trash"></i></button>
+      </div>`;
+    });
+    html+='</div></div>';
+  }
+
+  // Submissions table
+  html+=`<div class="card"><div class="card-header"><i class="ti ti-inbox" style="color:var(--text3)"></i><div class="card-title">Submissions</div><div style="margin-left:auto;font-size:11px;color:var(--text3)">${subs.length} total</div></div>`;
+  if(!subs.length){
+    html+=`<div class="empty"><i class="ti ti-inbox"></i><p>No submissions yet for this event.</p></div>`;
+  } else {
+    html+=`<div style="overflow-x:auto"><table class="sub-table">
+      <thead><tr><th>Member</th><th>Checkpoint</th><th>Submitted</th><th>Note</th><th>Status</th><th></th></tr></thead>
+      <tbody>${subs.map(s=>`<tr>
+        <td style="font-weight:600">${s.member_name||'—'}</td>
+        <td>${s.checkpoint_name||'—'}</td>
+        <td>${fmtDate(s.created_at)}</td>
+        <td style="max-width:150px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--text3)">${s.note||'—'}</td>
+        <td><span class="tag ${s.status}">${s.status==='approved'?'✓ Approved':'Submitted'}</span></td>
+        <td style="text-align:right;white-space:nowrap">
+          ${s.file_url?`<a href="${s.file_url}" target="_blank"><button class="act-btn view-file"><i class="ti ti-file-download"></i> View</button></a>`:''}
+          ${s.status==='submitted'?`<button class="act-btn approve" onclick="approveItem('${s.id}','${eventId}')"><i class="ti ti-check"></i> Approve</button>`:''}
+          <button class="act-btn" onclick="openEmail('${s.id}')"><i class="ti ti-mail"></i></button>
+        </td>
+      </tr>`).join('')}</tbody>
+    </table></div>`;
+  }
+  html+='</div>';
+  document.getElementById('officerEventContent').innerHTML=html;
 }
 
-// ─── SUBMIT ───────────────────────────────────────────────────────────────────
-function openSubmit(dlId) {
-  const dl = deadlines.find(d=>d.id===dlId);
-  if (!dl) return;
-  currentDlId = dlId;
-  const e = ev(dl.eventId);
-  document.getElementById('panelTitle').textContent = dl.name;
-  document.getElementById('panelSub').textContent = `${e.code} — Due ${fmtDate(dl.due)}`;
-  document.getElementById('noteArea').value = '';
+function saveMember(eventId){
+  const val=document.getElementById(`assignInput_${eventId}`)?.value.trim();
+  memberNames[eventId]=val;
+  saveMembers();
+  renderOfficerGrid();
+  showToast('Member saved!','ti-circle-check','var(--success)');
+}
+
+// ── SUBMIT ────────────────────────────────────────────
+function openSubmit(dlId, eventId){
+  const dl=deadlines.find(d=>d.id===dlId);
+  if(!dl) return;
+  currentDlId=dlId;
+  const e=ev(dl.eventId||eventId);
+  document.getElementById('panelTitle').textContent=dl.name;
+  document.getElementById('panelSub').textContent=`${e.code} — Due ${fmtDate(dl.due)}`;
+  document.getElementById('noteArea').value='';
   removeFile();
   document.getElementById('uploadProgress').classList.remove('show');
-  document.getElementById('progressFill').style.width = '0%';
+  document.getElementById('progressFill').style.width='0%';
   openOverlay('subOverlay');
 }
-
-function handleFile(input) {
-  if (input.files[0]) {
-    document.getElementById('fileChipName').textContent = input.files[0].name;
-    document.getElementById('fileChip').classList.add('show');
-  }
-}
-function removeFile() {
-  document.getElementById('fileInput').value = '';
-  document.getElementById('fileChip').classList.remove('show');
-  document.getElementById('fileChipName').textContent = '';
-}
-
-async function submitDeadline() {
-  const file = document.getElementById('fileInput').files[0];
-  if (!file) { showToast('Please attach a document first.', 'ti-alert-circle', 'var(--danger)'); return; }
-  const dl = deadlines.find(d=>d.id===currentDlId);
-  const e = ev(dl.eventId);
-  const note = document.getElementById('noteArea').value;
-  const btn = document.getElementById('submitBtn');
-  btn.disabled = true;
-  btn.innerHTML = '<i class="ti ti-loader ti-spin"></i> Uploading...';
+function handleFile(input){ if(input.files[0]){ document.getElementById('fileChipName').textContent=input.files[0].name; document.getElementById('fileChip').classList.add('show'); } }
+function removeFile(){ document.getElementById('fileInput').value=''; document.getElementById('fileChip').classList.remove('show'); document.getElementById('fileChipName').textContent=''; }
+async function submitDeadline(){
+  const file=document.getElementById('fileInput').files[0];
+  if(!file){ showToast('Please attach a document first.','ti-alert-circle','var(--danger)'); return; }
+  const dl=deadlines.find(d=>d.id===currentDlId);
+  const e=ev(dl.eventId);
+  const note=document.getElementById('noteArea').value;
+  const btn=document.getElementById('submitBtn');
+  btn.disabled=true; btn.innerHTML='<i class="ti ti-loader ti-spin"></i> Uploading...';
   document.getElementById('uploadProgress').classList.add('show');
-  document.getElementById('progressFill').style.width = '40%';
-
+  document.getElementById('progressFill').style.width='40%';
   try {
-    // Upload file to Supabase Storage
-    const ext = file.name.split('.').pop();
-    const path = `${currentUser.email}/${dl.eventId}/${dl.name.replace(/\s+/g,'_')}_${Date.now()}.${ext}`;
-    const { error: uploadError } = await sb.storage.from('submissions').upload(path, file);
-    if (uploadError) throw uploadError;
-    document.getElementById('progressFill').style.width = '70%';
-
-    // Get public URL
-    const { data: urlData } = sb.storage.from('submissions').getPublicUrl(path);
-    const fileUrl = urlData.publicUrl;
-    document.getElementById('progressFill').style.width = '85%';
-
-    // Insert record into database
-    const { error: dbError } = await sb.from('submissions').insert({
-      event_id: dl.eventId,
-      event_code: e.code,
-      checkpoint_name: dl.name,
-      member_name: currentUser.name,
-      member_email: currentUser.email,
-      note: note,
-      file_url: fileUrl,
-      status: 'submitted',
-      due_date: dl.due,
+    const ext=file.name.split('.').pop();
+    const path=`${currentUser.email}/${dl.eventId}/${dl.name.replace(/\s+/g,'_')}_${Date.now()}.${ext}`;
+    const {error:uploadError}=await sb.storage.from('submissions').upload(path,file);
+    if(uploadError) throw uploadError;
+    document.getElementById('progressFill').style.width='70%';
+    const {data:urlData}=sb.storage.from('submissions').getPublicUrl(path);
+    document.getElementById('progressFill').style.width='85%';
+    const {error:dbError}=await sb.from('submissions').insert({
+      event_id:dl.eventId, event_code:e.code, checkpoint_name:dl.name,
+      member_name:currentUser.name, member_email:currentUser.email,
+      note, file_url:urlData.publicUrl, status:'submitted', due_date:dl.due,
     });
-    if (dbError) throw dbError;
-
-    document.getElementById('progressFill').style.width = '100%';
+    if(dbError) throw dbError;
+    document.getElementById('progressFill').style.width='100%';
     await loadSubmissions();
     closeOverlay('subOverlay');
-    showToast('Submitted successfully!', 'ti-circle-check', 'var(--success)');
-  } catch (err) {
-    showToast('Upload failed — try again.', 'ti-alert-circle', 'var(--danger)');
+    renderMemberDetail(dl.eventId);
+    showToast('Submitted!','ti-circle-check','var(--success)');
+  } catch(err){
+    showToast('Upload failed — try again.','ti-alert-circle','var(--danger)');
     console.error(err);
   } finally {
-    btn.disabled = false;
-    btn.innerHTML = '<i class="ti ti-send"></i> Submit';
+    btn.disabled=false; btn.innerHTML='<i class="ti ti-send"></i> Submit';
     document.getElementById('uploadProgress').classList.remove('show');
-    document.getElementById('progressFill').style.width = '0%';
+    document.getElementById('progressFill').style.width='0%';
   }
 }
 
-// ─── OFFICER ──────────────────────────────────────────────────────────────────
-function renderOfficerStats() {
-  const total = deadlines.length;
-  const awaiting = allSubmissions.filter(s=>s.status==='submitted').length;
-  const approved = allSubmissions.filter(s=>s.status==='approved').length;
-  const overdue = deadlines.filter(d=>{ const days=daysUntil(d.due); return days!==null&&days<0&&!allSubmissions.find(s=>s.checkpoint_name===d.name&&s.status!=='pending'); }).length;
+// ── OFFICER: ALL SUBS ─────────────────────────────────
+function renderOfficerStats(){
+  const total=deadlines.length, awaiting=allSubmissions.filter(s=>s.status==='submitted').length,
+    approved=allSubmissions.filter(s=>s.status==='approved').length,
+    overdue=deadlines.filter(d=>{ const days=daysUntil(d.due); return days!==null&&days<0; }).length;
   document.getElementById('officerStats').innerHTML=[
-    ['Total deadlines',total,'var(--text)'],
-    ['Awaiting review',awaiting,'var(--gold)'],
-    ['Approved',approved,'var(--success)'],
-    ['Overdue',overdue,'var(--danger)'],
+    ['Total deadlines',total,'var(--text)'],['Awaiting review',awaiting,'var(--gold)'],
+    ['Approved',approved,'var(--success)'],['Overdue',overdue,'var(--danger)'],
   ].map(([lbl,num,col])=>`<div class="stat-card"><div class="stat-num" style="color:${col}">${num}</div><div class="stat-lbl">${lbl}</div></div>`).join('');
 }
-
-function updateInboxBadge() {
-  const n = allSubmissions.filter(s=>s.status==='submitted').length;
-  const b = document.getElementById('inboxBadge');
-  b.textContent = n; b.style.display = n>0?'':'none';
+function updateInboxBadge(){
+  const n=allSubmissions.filter(s=>s.status==='submitted').length;
+  const b=document.getElementById('inboxBadge'); b.textContent=n; b.style.display=n>0?'':'none';
 }
-
-function setFilter(f) {
-  currentFilter = f;
-  document.getElementById('filterAll').classList.toggle('active',f==='all');
-  document.getElementById('filterPending').classList.toggle('active',f==='submitted');
-  document.getElementById('filterApproved').classList.toggle('active',f==='approved');
-  renderInboxTable();
+function setFilter(f){
+  currentFilter=f;
+  ['All','Pending','Approved'].forEach(k=>{ const el=document.getElementById('filter'+k); if(el) el.classList.remove('active'); });
+  document.getElementById(f==='all'?'filterAll':f==='submitted'?'filterPending':'filterApproved')?.classList.add('active');
+  renderAllSubsTable();
 }
-
-function renderInboxTable() {
-  let rows = currentFilter==='submitted' ? allSubmissions.filter(s=>s.status==='submitted')
-           : currentFilter==='approved'  ? allSubmissions.filter(s=>s.status==='approved')
-           : allSubmissions;
-  const tbody = document.getElementById('inboxTableBody');
-  if (!rows.length) { tbody.innerHTML=`<tr><td colspan="8"><div class="empty"><i class="ti ti-inbox"></i><p>No submissions yet</p></div></td></tr>`; return; }
-  tbody.innerHTML = rows.map(s=>`<tr>
+function renderAllSubsTable(){
+  let rows=currentFilter==='submitted'?allSubmissions.filter(s=>s.status==='submitted'):currentFilter==='approved'?allSubmissions.filter(s=>s.status==='approved'):allSubmissions;
+  const tbody=document.getElementById('allSubsBody');
+  if(!tbody) return;
+  if(!rows.length){ tbody.innerHTML=`<tr><td colspan="8"><div class="empty"><i class="ti ti-inbox"></i><p>No submissions yet</p></div></td></tr>`; return; }
+  tbody.innerHTML=rows.map(s=>`<tr>
     <td style="font-weight:600">${s.member_name||'—'}</td>
     <td style="color:var(--text3);font-size:11px">${s.member_email||'—'}</td>
     <td><span class="code-pill">${s.event_code||''}</span></td>
@@ -732,74 +825,77 @@ function renderInboxTable() {
     </td>
   </tr>`).join('');
 }
-
-async function approveItem(id) {
-  const { error } = await sb.from('submissions').update({ status: 'approved' }).eq('id', id);
-  if (error) { showToast('Error approving — try again.','ti-alert-circle','var(--danger)'); return; }
+async function approveItem(id, eventId){
+  const {error}=await sb.from('submissions').update({status:'approved'}).eq('id',id);
+  if(error){ showToast('Error — try again.','ti-alert-circle','var(--danger)'); return; }
   await loadSubmissions();
-  showToast('Approved!', 'ti-circle-check', 'var(--success)');
+  if(eventId) openOfficerEvent(eventId);
+  showToast('Approved!','ti-circle-check','var(--success)');
 }
 
-// ─── DEADLINES (local) ────────────────────────────────────────────────────────
-function renderDeadlinesTable() {
-  const f = document.getElementById('filterEvent').value;
-  const rows = f ? deadlines.filter(d=>d.eventId===f) : deadlines;
-  const card = document.getElementById('deadlinesCard');
-  if (!rows.length) { card.innerHTML=`<div class="empty"><i class="ti ti-calendar-off"></i><p>No deadlines yet. Add one above.</p></div>`; return; }
+// ── DEADLINES ─────────────────────────────────────────
+function renderDeadlinesTable(){
+  const f=document.getElementById('filterEvent')?.value;
+  const rows=f?deadlines.filter(d=>d.eventId===f):deadlines;
+  const card=document.getElementById('deadlinesCard');
+  if(!card) return;
+  if(!rows.length){ card.innerHTML=`<div class="empty"><i class="ti ti-calendar-off"></i><p>No deadlines yet.</p></div>`; return; }
   card.innerHTML=`<div style="overflow-x:auto"><table class="sub-table">
     <thead><tr><th>Event</th><th>Checkpoint</th><th>Due</th><th>Submissions</th><th></th></tr></thead>
     <tbody>${rows.map(d=>{
-      const subs = allSubmissions.filter(s=>s.checkpoint_name===d.name&&s.event_id===d.eventId);
+      const subs=allSubmissions.filter(s=>s.checkpoint_name===d.name&&s.event_id===d.eventId);
       return `<tr>
         <td><span class="code-pill">${ev(d.eventId)?.code}</span></td>
         <td style="font-weight:600">${d.name}</td>
         <td>${fmtDate(d.due)}</td>
         <td style="color:var(--text3)">${subs.length} submitted</td>
-        <td style="text-align:right"><button class="act-btn" onclick="deleteDl('${d.id}')" style="color:var(--danger);border-color:rgba(232,64,64,0.3)"><i class="ti ti-trash"></i></button></td>
+        <td style="text-align:right"><button class="act-btn" onclick="deleteDl('${d.id}')" style="color:var(--danger);border-color:rgba(224,62,62,0.3)"><i class="ti ti-trash"></i></button></td>
       </tr>`;
     }).join('')}</tbody>
   </table></div>`;
 }
-
-function openAddDeadline() { openOverlay('addDlOverlay'); }
-function saveDeadline() {
+function openAddDeadline(presetEventId){
+  if(presetEventId){ document.getElementById('dlEventSel').value=presetEventId; }
+  openOverlay('addDlOverlay');
+}
+function saveDeadline(){
   const eventId=document.getElementById('dlEventSel').value, name=document.getElementById('dlNameInput').value.trim(), due=document.getElementById('dlDateInput').value;
-  if (!eventId||!name||!due) { showToast('Please fill in all fields.','ti-alert-circle','var(--danger)'); return; }
-  deadlines.push({ id:'d'+Date.now(), eventId, name, due, status:'pending' });
+  if(!eventId||!name||!due){ showToast('Please fill in all fields.','ti-alert-circle','var(--danger)'); return; }
+  deadlines.push({id:'d'+Date.now(),eventId,name,due,status:'pending'});
   saveDeadlines(); closeOverlay('addDlOverlay');
   document.getElementById('dlNameInput').value=''; document.getElementById('dlDateInput').value='';
   renderDeadlinesTable(); renderOfficerStats();
   showToast('Deadline added!','ti-circle-check','var(--success)');
 }
-function deleteDl(id) {
-  if (!confirm('Delete this deadline?')) return;
+function deleteDl(id){
+  if(!confirm('Delete this deadline?')) return;
   deadlines=deadlines.filter(d=>d.id!==id); saveDeadlines();
-  renderDeadlinesTable(); renderOfficerStats(); renderMemberDeadlines();
+  renderDeadlinesTable(); renderOfficerStats(); renderMemberGrid();
   showToast('Deadline removed.','ti-trash','var(--text3)');
 }
 
-// ─── EMAIL ────────────────────────────────────────────────────────────────────
-function openEmail(subId) {
-  const s = allSubmissions.find(s=>s.id==subId);
-  document.getElementById('emailSub').textContent = `${s.member_name||'Member'} — ${s.event_code}`;
-  document.getElementById('emailTo').value = s.member_email||'';
-  document.getElementById('emailSubject').value = `DECA ${s.event_code} — ${s.checkpoint_name}`;
-  document.getElementById('emailBody').value = `Hi ${s.member_name||'there'},\n\nFollowing up on your ${s.event_code} submission for "${s.checkpoint_name}".\n\n`;
+// ── EMAIL ─────────────────────────────────────────────
+function openEmail(subId){
+  const s=allSubmissions.find(s=>s.id==subId);
+  document.getElementById('emailSub').textContent=`${s.member_name||'Member'} — ${s.event_code}`;
+  document.getElementById('emailTo').value=s.member_email||'';
+  document.getElementById('emailSubject').value=`DECA ${s.event_code} — ${s.checkpoint_name}`;
+  document.getElementById('emailBody').value=`Hi ${s.member_name||'there'},\n\nFollowing up on your ${s.event_code} submission for "${s.checkpoint_name}".\n\n`;
   openOverlay('emailOverlay');
 }
-function sendEmail() {
+function sendEmail(){
   const to=document.getElementById('emailTo').value, sub=encodeURIComponent(document.getElementById('emailSubject').value), body=encodeURIComponent(document.getElementById('emailBody').value);
   window.open(`mailto:${to}?subject=${sub}&body=${body}`); closeOverlay('emailOverlay');
 }
 
-// ─── OVERLAYS ─────────────────────────────────────────────────────────────────
-function openOverlay(id) { document.getElementById(id).classList.add('open'); }
-function closeOverlay(id) { document.getElementById(id).classList.remove('open'); }
-document.addEventListener('click', e => { ['subOverlay','addDlOverlay','emailOverlay'].forEach(id=>{ if(e.target===document.getElementById(id)) closeOverlay(id); }); });
+// ── OVERLAYS ──────────────────────────────────────────
+function openOverlay(id){ document.getElementById(id).classList.add('open'); }
+function closeOverlay(id){ document.getElementById(id).classList.remove('open'); }
+document.addEventListener('click',e=>{ ['subOverlay','addDlOverlay','emailOverlay'].forEach(id=>{ if(e.target===document.getElementById(id)) closeOverlay(id); }); });
 
-// ─── TOAST ────────────────────────────────────────────────────────────────────
+// ── TOAST ─────────────────────────────────────────────
 let toastTimer;
-function showToast(msg, icon='ti-circle-check', iconColor='var(--success)') {
+function showToast(msg,icon='ti-circle-check',iconColor='var(--success)'){
   clearTimeout(toastTimer);
   const t=document.getElementById('toast');
   t.innerHTML=`<i class="ti ${icon}" style="color:${iconColor}"></i> ${msg}`;
