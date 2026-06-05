@@ -578,10 +578,12 @@ function renderMemberGrid(){
       const hasApproved=mySubs.some(s=>s.status==='approved');
       const hasSub=mySubs.some(s=>s.status==='submitted');
       const dotCls=hasApproved?'all-good':hasSub?'has-sub':'';
-      html+=`<div class="ev-tile cat-${cat.key}" onclick="openMemberEvent('${id}')">
+      const assignedEmails=Array.isArray(memberNames[id])?memberNames[id]:memberNames[id]?[memberNames[id]]:[];
+      const isAssigned=assignedEmails.length===0||assignedEmails.includes(currentUser.email);
+      html+=`<div class="ev-tile cat-${cat.key}" onclick="openMemberEvent('${id}')" style="${!isAssigned?'opacity:0.4;filter:grayscale(0.5)':''}">
         <div class="ev-tile-top"><span class="ev-tile-code">${e.code}</span><span class="ev-tile-dot ${dotCls}"></span></div>
         <div class="ev-tile-name">${e.name}</div>
-        <div class="ev-tile-meta">${dls.length} deadline${dls.length!==1?'s':''}</div>
+        <div class="ev-tile-meta">${isAssigned?`${dls.length} deadline${dls.length!==1?'s':''}`:'Not your event'}</div>
       </div>`;
     });
     html+='</div></div>';
@@ -605,7 +607,14 @@ function renderMemberDetail(eventId){
   const cont=document.getElementById('memberDetailContent');
   const dls=deadlines.filter(d=>d.eventId===eventId);
   const mySubs=allSubmissions.filter(s=>s.event_id===eventId&&s.member_email===currentUser.email);
+  // Check if this member is assigned to this event
+  const assignedEmails=Array.isArray(memberNames[eventId])?memberNames[eventId]:memberNames[eventId]?[memberNames[eventId]]:[];
+  const isAssigned=assignedEmails.length===0||assignedEmails.includes(currentUser.email);
   if(!dls.length){ cont.innerHTML='<div class="card"><div class="empty"><i class="ti ti-calendar-off"></i><p>No deadlines set yet — check back soon.</p></div></div>'; return; }
+  if(!isAssigned){
+    cont.innerHTML=`<div class="card"><div class="empty"><i class="ti ti-lock"></i><p>You are not assigned to this event.<br>Contact your officer if you think this is a mistake.</p></div></div>`;
+    return;
+  }
   const rows=dls.map(d=>{
     const mySub=mySubs.find(s=>s.checkpoint_name===d.name);
     const status=mySub?mySub.status:'pending';
@@ -647,7 +656,7 @@ function renderOfficerGrid(){
       html+=`<div class="ev-tile cat-${cat.key}" onclick="openOfficerEvent('${id}')">
         <div class="ev-tile-top"><span class="ev-tile-code">${e.code}</span><span class="ev-tile-dot ${dotCls}"></span></div>
         <div class="ev-tile-name">${e.name}</div>
-        <div class="ev-tile-member">${(Array.isArray(memberNames[id])&&memberNames[id].length?memberNames[id].join(', '):(typeof memberNames[id]==='string'&&memberNames[id]?memberNames[id]:'No member assigned'))}</div>
+        <div class="ev-tile-member">${(()=>{ const ml=Array.isArray(memberNames[id])?memberNames[id]:memberNames[id]?[memberNames[id]]:[]; return ml.length?ml.join(', '):'No member assigned'; })()}</div>
         <div class="ev-tile-meta">${subs.length} submission${subs.length!==1?'s':''}${pending>0?` · <span style="color:var(--gold)">${pending} pending</span>`:''}</div>
       </div>`;
     });
@@ -677,7 +686,7 @@ function openOfficerEvent(eventId){
   let html=`<div class="gold-line"></div>
   <div class="assign-strip">
     <div style="flex:1">
-      <div style="font-size:11px;font-weight:600;color:var(--text3);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:8px">Assigned Members</div>
+      <div style="font-size:11px;font-weight:600;color:var(--text3);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:8px">Assigned Member Emails</div>
       <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:${memberList.length?'10px':'0'}">
         ${memberList.map(m=>`<span style="display:inline-flex;align-items:center;gap:6px;background:rgba(0,87,168,0.18);border:1px solid rgba(0,87,168,0.3);border-radius:20px;padding:4px 12px;font-size:13px;font-weight:600;color:var(--white)">
           ${m}
@@ -685,7 +694,7 @@ function openOfficerEvent(eventId){
         </span>`).join('')}
       </div>
       <div style="display:flex;gap:8px;align-items:center">
-        <input type="text" id="assignInput_${eventId}" placeholder="Add member name..." style="flex:1;min-width:160px">
+        <input type="text" id="assignInput_${eventId}" placeholder="Add member email (e.g. student@govalor.com)..." style="flex:1;min-width:160px">
         <button class="assign-save-btn" onclick="saveMember('${eventId}')">Add</button>
       </div>
     </div>
