@@ -485,10 +485,29 @@ let currentUser = null;
 let currentDlId = null;
 let currentFilter = 'all';
 let allSubmissions = [];
-let deadlines = JSON.parse(localStorage.getItem('deca_deadlines')||'[]');
-let memberNames = JSON.parse(localStorage.getItem('deca_members')||'{}'); // {eventId: name}
-function saveDeadlines(){ localStorage.setItem('deca_deadlines', JSON.stringify(deadlines)); }
-function saveMembers(){ localStorage.setItem('deca_members', JSON.stringify(memberNames)); }
+let deadlines = [];
+let memberNames = {};
+
+async function loadDeadlines(){
+  const {data,error}=await sb.from('deadlines').select('*');
+  if(error){ console.error(error); return; }
+  deadlines=(data||[]).map(d=>({
+    id:d.id,
+    eventId:d.event_id,
+    name:d.name,
+    due:d.due
+  }));
+}
+
+async function loadEventMembers(){
+  const {data,error}=await sb.from('event_members').select('*');
+  if(error){ console.error(error); return; }
+  memberNames={};
+  (data||[]).forEach(r=>{
+    if(!memberNames[r.event_id]) memberNames[r.event_id]=[];
+    memberNames[r.event_id].push(r.member_email);
+  });
+}
 
 // ── GOOGLE AUTH ───────────────────────────────────────
 window.addEventListener('load', ()=>{
@@ -518,13 +537,15 @@ function signOut(){
 }
 
 // ── INIT ──────────────────────────────────────────────
-function init(){
+async function init(){
   ['dlEventSel','filterEvent'].forEach(sid=>{
     const sel=document.getElementById(sid); if(!sel) return;
     sel.innerHTML=sid==='filterEvent'?'<option value="">All events</option>':'<option value="">— Select event —</option>';
     EVENTS.forEach(e=>{ const o=document.createElement('option'); o.value=e.id; o.textContent=`${e.code} — ${e.name}`; sel.appendChild(o); });
   });
-  loadSubmissions();
+  await loadDeadlines();
+  await loadEventMembers();
+  await loadSubmissions();
 }
 async function loadSubmissions(){
   const {data,error}=await sb.from('submissions').select('*').order('created_at',{ascending:false});
@@ -742,22 +763,20 @@ function openOfficerEvent(eventId){
   document.getElementById('officerEventContent').innerHTML=html;
 }
 
-function saveMember(eventId){
+async function saveMember(eventId){
   const val=document.getElementById(`assignInput_${eventId}`)?.value.trim();
   if(!val) return;
-  if(!memberNames[eventId]) memberNames[eventId]=[];
-  if(typeof memberNames[eventId]==='string') memberNames[eventId]=[memberNames[eventId]];
-  if(!memberNames[eventId].includes(val)) memberNames[eventId].push(val);
-  saveMembers();
+  const {error}=await sb.from('event_members').insert({event_id:eventId,member_email:val});
+  if(error){ console.error(error); showToast(error.message,'ti-alert-circle','var(--danger)'); return; }
+  await loadEventMembers();
   renderOfficerGrid();
   openOfficerEvent(eventId);
   showToast(`Added ${val}!`,'ti-circle-check','var(--success)');
 }
-function removeMember(eventId, name){
-  if(!memberNames[eventId]) return;
-  if(typeof memberNames[eventId]==='string') memberNames[eventId]=[memberNames[eventId]];
-  memberNames[eventId]=memberNames[eventId].filter(n=>n!==name);
-  saveMembers();
+async function removeMember(eventId, name){
+  const {error}=await sb.from('event_members').delete().eq('event_id',eventId).eq('member_email',name);
+  if(error){ console.error(error); return; }
+  await loadEventMembers();
   renderOfficerGrid();
   openOfficerEvent(eventId);
   showToast('Member removed.','ti-trash','var(--text3)');
@@ -900,18 +919,22 @@ function openAddDeadline(presetEventId){
   if(presetEventId){ document.getElementById('dlEventSel').value=presetEventId; }
   openOverlay('addDlOverlay');
 }
-function saveDeadline(){
+async function saveDeadline(){
   const eventId=document.getElementById('dlEventSel').value, name=document.getElementById('dlNameInput').value.trim(), due=document.getElementById('dlDateInput').value;
   if(!eventId||!name||!due){ showToast('Please fill in all fields.','ti-alert-circle','var(--danger)'); return; }
-  deadlines.push({id:'d'+Date.now(),eventId,name,due,status:'pending'});
-  saveDeadlines(); closeOverlay('addDlOverlay');
+  const {error}=await sb.from('deadlines').insert({event_id:eventId,name,due});
+  if(error){ console.error(error); showToast(error.message,'ti-alert-circle','var(--danger)'); return; }
+  await loadDeadlines();
+  closeOverlay('addDlOverlay');
   document.getElementById('dlNameInput').value=''; document.getElementById('dlDateInput').value='';
-  renderDeadlinesTable(); renderOfficerStats();
+  renderDeadlinesTable(); renderOfficerStats(); renderMemberGrid();
   showToast('Deadline added!','ti-circle-check','var(--success)');
 }
-function deleteDl(id){
+async function deleteDl(id){
   if(!confirm('Delete this deadline?')) return;
-  deadlines=deadlines.filter(d=>d.id!==id); saveDeadlines();
+  const {error}=await sb.from('deadlines').delete().eq('id',id);
+  if(error){ console.error(error); return; }
+  await loadDeadlines();
   renderDeadlinesTable(); renderOfficerStats(); renderMemberGrid();
   showToast('Deadline removed.','ti-trash','var(--text3)');
 }
